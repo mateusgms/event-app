@@ -32,6 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
-## application ##
+### BD ###
+
 !**/src/main/resources/application.properties
 !**/src/main/resources/application.yml
