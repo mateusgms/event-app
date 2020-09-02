@@ -27,8 +27,9 @@ public class User {
     private String uf;
     private String country;
     private String username;
-    private String password;
-    private Date date;
+	private String password;
+	private Date date;
+	private Boolean isAdmin;
     
 	public int getId() {
 		return id;
@@ -108,6 +109,19 @@ public class User {
 	public void setDate(Date date) {
 
 		this.date = date;
+	}
+
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin, User user) {
+		if(user.isAdmin){
+			this.isAdmin= isAdmin;
+		}
+		else{
+			this.isAdmin = false;
+		}
 	}
 	
 }

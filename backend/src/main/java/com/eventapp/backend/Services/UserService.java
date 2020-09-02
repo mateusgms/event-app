@@ -44,6 +44,7 @@ public class UserService {
         existingUser.setPhone(user.getPhone());
         existingUser.setUf(user.getUf());
         existingUser.setUsername(user.getUsername());
+        existingUser.setIsAdmin(user.getIsAdmin());
 
         return repository.save(existingUser);
     }
