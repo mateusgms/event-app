@@ -18,10 +18,10 @@ public class UserService {
     }
     
     public List<User> saveUsers(List<User> users){
-        return repository.saveAll(users);
+        return (List<User>) repository.saveAll(users);
     }
     public List<User> getUsers(){
-        return repository.findAll();
+        return (List<User>) repository.findAll();
     }
     public User getUserById(int id){
         return repository.findById(id).orElse(null);
