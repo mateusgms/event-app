@@ -106,22 +106,8 @@ public class User {
 	}
 
 	public void setDate(Date date) {
+
 		this.date = date;
 	}
-	/*public User(int id, String name, String email, String phone, String address, String uf, String country,
-			String username, String password, Date date) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		this.address = address;
-		this.uf = uf;
-		this.country = country;
-		this.username = username;
-		this.password = password;
-		this.date = date;
-	}
-    */
-
-
+	
 }
