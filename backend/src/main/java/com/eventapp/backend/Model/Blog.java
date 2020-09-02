@@ -8,7 +8,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
 
 
 @Data
@@ -19,7 +23,9 @@ import javax.persistence.Table;
 public class Blog {
 	@Id
 	@GeneratedValue
-    private int id;
+	private int id;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
     private User author;
     private String title;
     private String summary;
