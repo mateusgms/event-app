@@ -3,7 +3,6 @@ package com.eventapp.backend.Services;
 import java.util.List;
 
 import com.eventapp.backend.Model.Support;
-import com.eventapp.backend.Model.User;
 import com.eventapp.backend.Repository.SupportRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
