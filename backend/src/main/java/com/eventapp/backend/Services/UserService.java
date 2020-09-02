@@ -31,7 +31,7 @@ public class UserService {
     }
     public String deleteUser(int id){
         repository.deleteById(id);
-        return "product removed!! " + id;
+        return "User removed!! " + id;
     }
     public User updateUser(User user){
         User existingUser = repository.findById(user.getId()).orElse(null);

@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
 @RestController
 public class UserController {
-
 
     @Autowired
     private UserService service;
@@ -25,6 +23,7 @@ public class UserController {
     // CREATE
     @PostMapping("/addUser")
     public User addUser(@RequestBody User user) {
+ 
         return service.saveUser(user);
     }
     @PostMapping("/addUsers")
@@ -47,13 +46,13 @@ public class UserController {
     }
 
     // PUT
-    @PutMapping("/update")
+    @PutMapping("/updateUser")
     public User updateUser(@RequestBody User user) {
         return service.updateUser(user);
     }
 
     // DELETE
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable int id) {
         return service.deleteUser(id);
     }
