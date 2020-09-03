@@ -18,10 +18,10 @@ public class BlogService {
     }
     
     public List<Blog> saveBlogs(List<Blog> blogs){
-        return (List<Blog>) repository.saveAll(blogs);
+        return repository.saveAll(blogs);
     }
     public List<Blog> getBlogs(){
-        return (List<Blog>) repository.findAll();
+        return repository.findAll();
     }
     public Blog getBlogById(int id){
         return repository.findById(id).orElse(null);

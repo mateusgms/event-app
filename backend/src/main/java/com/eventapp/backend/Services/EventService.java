@@ -50,7 +50,6 @@ public class EventService {
     public Event updateEvent(Event event){
 
         Event existingEvent = repository.findById(event.getId()).orElse(null);
-        
         existingEvent.setAddress(event.getAddress());
         existingEvent.setCountry(event.getCountry());
         existingEvent.setDate(event.getDate());

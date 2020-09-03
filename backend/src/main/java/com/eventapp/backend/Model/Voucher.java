@@ -4,8 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,12 +26,12 @@ public class Voucher {
     @GeneratedValue
     private int id;
 
-    @OneToMany
-    @JoinColumn(name ="event_id")
+    @ManyToOne
+    @JoinColumn(name ="event_id", nullable = false)
     private Event event;
 
-    @OneToMany
-    @JoinColumn(name="user_id")
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable = false)
     private User user;
 
     private int quantity;
