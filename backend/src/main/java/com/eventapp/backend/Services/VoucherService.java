@@ -42,7 +42,7 @@ public class VoucherService {
 
     public Voucher updateVoucher(Voucher voucher) {
 
-        Voucher existingVoucher = repository.findById(voucher.getEvent()).orElse(null);
+        Voucher existingVoucher = repository.findById(voucher.getId()).orElse(null);
 
         existingVoucher.setAvailable(voucher.getAvailable());
         existingVoucher.setQuantity(voucher.getQuantity());
