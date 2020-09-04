@@ -1,13 +1,20 @@
 <mat-toolbar>
+
   <a [routerLink]="['/']">
     <h1>Event App</h1>
   </a>
   <span class="example-spacer"></span>
-  <mat-icon>perm_identity</mat-icon>
+
+  <a [routerLink]="['/login']">
+    <mat-icon>perm_identity</mat-icon>
+  </a>
+
   <a [routerLink]="['/blog']">
     <h1>Noviades</h1>
   </a>
+
   <a [routerLink]="['/event']">
     <h1>Eventos</h1>
   </a>
+
 </mat-toolbar>
