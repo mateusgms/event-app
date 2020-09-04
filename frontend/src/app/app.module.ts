@@ -9,6 +9,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import {MatCarouselModule} from '@ngmodule/material-carousel';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import {MatCardModule} from '@angular/material/card';
     MatToolbarModule,
     BrowserAnimationsModule,
     MatIconModule,
-    MatCardModule    
+    MatCardModule,
+    MatCarouselModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,11 @@
+.card {
+  max-width: 800px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+  
+.example-header-image {
+  background-image: url(https://nacoesunidas.org/wp-content/uploads/2020/04/jerusalem-1712855_1280.jpg);
+  background-size: cover;
+}
