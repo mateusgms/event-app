@@ -18,10 +18,10 @@ public class SupportService {
     }
     
     public List<Support> saveSupports(List<Support> supports){
-        return (List<Support>) repository.saveAll(supports);
+        return repository.saveAll(supports);
     }
     public List<Support> getSupports(){
-        return (List<Support>) repository.findAll();
+        return repository.findAll();
     }
     public Support getSupportById(int id){
         return repository.findById(id).orElse(null);

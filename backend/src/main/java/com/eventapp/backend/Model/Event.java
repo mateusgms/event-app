@@ -27,6 +27,7 @@ public class Event {
     private String address;
     private String uf;
     private String country;
+    private String imageURL;
     private float value;
     private Date date;
 
@@ -77,6 +78,14 @@ public class Event {
     public void setCountry(String country) {
         this.country = country;
     }
+
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
 
     public float getValue() {
         return value;

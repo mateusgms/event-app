@@ -4,6 +4,8 @@ import { HomeComponent } from './components/home/home.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { EventComponent } from './components/event/event.component';
 import { LogInComponent } from './components/log-in/log-in.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 
 const routes: Routes = [
   {
@@ -15,11 +17,19 @@ const routes: Routes = [
     component: BlogComponent
   },
   {
+    path: 'post/:eventId',
+    component: BlogDetailsComponent
+  },
+  {
     path: 'event',
     component: EventComponent
   },
   {
-    path:'login',
+    path: 'event/:eventId',
+    component: EventDetailsComponent
+  },
+  {
+    path: 'login',
     component: LogInComponent
   }
 ];

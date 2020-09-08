@@ -1,3 +1,4 @@
+<!-- Carrosel -->
 <mat-carousel
   timings="250ms ease-in"
   [autoplay]="true"
@@ -21,3 +22,40 @@
     [hideOverlay]="false"
   ></mat-carousel-slide>
 </mat-carousel>
+
+<!-- Eventos -->
+<div style="background-color: whitesmoke;">
+  <a [routerLink]="['/event']">Veja mais >></a>
+
+  <div fxLayout='row wrap' fxLayoutWrap class="cards" style="background-color: darkgrey;">
+    <div fxFlex="20" class="card" *ngFor="let event of events; index as eventId">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title><a [title]="event.title" [routerLink]="['/event',eventId]"> {{event.title}}</a></mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="{{event.imageURL}}">
+        <mat-card-content>
+          {{event.description}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>>
+
+<!-- Novidades -->
+<a [routerLink]="['/post']">Veja mais >></a>
+
+
+<div fxLayout='row wrap' fxLayoutWrap class="posts">
+  <div fxFlex="20" class="card" *ngFor="let post of posts; index as postId">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title><a [title]="post.title" [routerLink]="['/post',postId]"> {{post.title}}</a></mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{post.imageURL}}">
+      <mat-card-content>
+        {{post.description}}
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

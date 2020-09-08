@@ -18,10 +18,10 @@ public class UserService {
     }
     
     public List<User> saveUsers(List<User> users){
-        return (List<User>) repository.saveAll(users);
+        return repository.saveAll(users);
     }
     public List<User> getUsers(){
-        return (List<User>) repository.findAll();
+        return repository.findAll();
     }
     public User getUserById(int id){
         return repository.findById(id).orElse(null);
@@ -43,7 +43,6 @@ public class UserService {
         existingUser.setPassword(user.getPassword());
         existingUser.setPhone(user.getPhone());
         existingUser.setUf(user.getUf());
-        existingUser.setUsername(user.getUsername());
         existingUser.setIsAdmin(user.getIsAdmin());
 
         return repository.save(existingUser);

@@ -56,6 +56,7 @@ public class EventService {
         existingEvent.setTitle(event.getTitle());
         existingEvent.setDescription(event.getDescription());
         existingEvent.setValue(event.getValue());
+        existingEvent.setImageURL(event.getImageURL());
         existingEvent.setUf(event.getUf());
 
         return repository.save(existingEvent);
