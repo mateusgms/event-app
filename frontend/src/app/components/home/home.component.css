@@ -1,11 +1,19 @@
+/* Carrosel CSS */
+
+/* Cards CSS */
 .card {
-  max-width: 800px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  max-width: 200px;
 }
-  
-.example-header-image {
-  background-image: url(https://nacoesunidas.org/wp-content/uploads/2020/04/jerusalem-1712855_1280.jpg);
-  background-size: cover;
+.cards{
+  width: 400px;
+}
+
+/* Links CSS */
+a {
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(19, 47, 139);
 }

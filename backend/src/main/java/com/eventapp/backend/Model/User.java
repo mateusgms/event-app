@@ -26,7 +26,6 @@ public class User {
     private String address;
     private String uf;
     private String country;
-    private String username;
 	private String password;
 	private Date date;
 	private Boolean isAdmin;
@@ -84,14 +83,6 @@ public class User {
 
 	public void setCountry(String country) {
 		this.country = country;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {
