@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 import { events } from '../../events';
 
@@ -9,6 +9,7 @@ import { events } from '../../events';
 })
 export class EventComponent implements OnInit {
   events = events;
+
   constructor() { }
 
   ngOnInit(): void {
