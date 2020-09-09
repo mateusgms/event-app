@@ -2,10 +2,13 @@
 
 /* Cards CSS */
 .card {
-  max-width: 200px;
+  max-height: 350px;
+  max-width: 350px;
+  display: flex;
+  margin-right: 25px;
 }
 .cards{
-  width: 400px;
+  display: flex;
 }
 
 /* Links CSS */
@@ -16,4 +19,9 @@ a {
 }
 a:hover {
   color: rgb(19, 47, 139);
+}
+
+ img{
+  height: 194px;
+  max-width: 350px;
 }

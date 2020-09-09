@@ -24,10 +24,10 @@
 </mat-carousel>
 
 <!-- Eventos -->
-<div style="background-color: whitesmoke;">
+<div style="background-color: darkgray;">
   <a [routerLink]="['/event']">Veja mais >></a>
 
-  <div fxLayout='row wrap' fxLayoutWrap class="cards" style="background-color: darkgrey;">
+  <div fxLayout='row' fxLayoutWrap class="cards">
     <div fxFlex="20" class="card" *ngFor="let event of events; index as eventId">
       <mat-card>
         <mat-card-header>
@@ -37,6 +37,9 @@
         <mat-card-content>
           {{event.description}}
         </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">Inscrever-se</button>
+        </mat-card-actions>
       </mat-card>
     </div>
   </div>
@@ -46,7 +49,7 @@
 <a [routerLink]="['/post']">Veja mais >></a>
 
 
-<div fxLayout='row wrap' fxLayoutWrap class="posts">
+<div fxLayout='row' fxLayoutWrap class="cards">
   <div fxFlex="20" class="card" *ngFor="let post of posts; index as postId">
     <mat-card>
       <mat-card-header>
