@@ -1,3 +1,7 @@
+import { BlogComponent } from './components/blog/blog.component';
+import { EventComponent } from './components/event/event.component';
+import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -17,6 +21,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { FootBarComponent } from './components/foot-bar/foot-bar.component';
 
 
 
@@ -25,7 +32,12 @@ import { MatButtonModule } from '@angular/material/button';
     AppComponent,
     HomeComponent,
     TopBarComponent,
-    LogInComponent
+    LogInComponent,
+    EventDetailsComponent,
+    BlogDetailsComponent,
+    EventComponent,
+    BlogComponent,
+    FootBarComponent
    ],
   imports: [
     BrowserModule,
@@ -39,7 +51,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatListModule,
+    MatGridListModule,
+    //FootBarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
