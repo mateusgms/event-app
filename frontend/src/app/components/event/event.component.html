@@ -1,3 +1,11 @@
-<mat-grid-list *ngFor="let event of events;">
-  <img src="{{event.imageURL}}">
-</mat-grid-list>
+<mat-list>
+  <div mat-subheader>Eventos</div>
+  <mat-list-item [routerLink]="['/event',eventId]" *ngFor="let event of events; index as eventId">
+    <div mat-list-icon>
+      <img src="{{event.imageURL}}">
+    </div>
+    <h3 matLine> {{event.title}} </h3>
+    <p matLine> {{event.description}} </p>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>

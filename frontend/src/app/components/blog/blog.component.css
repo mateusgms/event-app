@@ -1,0 +1,20 @@
+img{
+    width: 35px;
+    height: 35px;
+}
+
+mat-list{
+    margin: 20px;
+    max-width: 500px;
+    width: 33%;
+}
+
+mat-list-item{
+    margin-bottom: 10px;
+    height: 300px;
+    width: 400px;
+}
+
+mat-list-item:hover{
+    background-color: whitesmoke;
+}

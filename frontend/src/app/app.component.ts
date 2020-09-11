@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatCarousel, MatCarouselComponent } from '@ngmodule/material-carousel';
 
 @Component({
   selector: 'app-root',
