@@ -24,7 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FootBarComponent } from './components/foot-bar/foot-bar.component';
-
+import { SupportComponent } from './components/support/support.component';
 
 
 @NgModule({
@@ -37,7 +37,8 @@ import { FootBarComponent } from './components/foot-bar/foot-bar.component';
     BlogDetailsComponent,
     EventComponent,
     BlogComponent,
-    FootBarComponent
+    FootBarComponent,
+    SupportComponent
    ],
   imports: [
     BrowserModule,
