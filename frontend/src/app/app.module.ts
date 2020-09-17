@@ -29,6 +29,7 @@ import {HttpClientModule} from '@angular/common/http'
 import { FootBarComponent } from './components/foot-bar/foot-bar.component';
 import { SupportComponent } from './components/support/support.component';
 import {MatTableModule} from '@angular/material/table'; 
+import { VoucherComponent } from './components/voucher/voucher.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import {MatTableModule} from '@angular/material/table';
     BlogComponent,
     FootBarComponent,
     SupportComponent,
-    ListUsersComponent
+    ListUsersComponent,
+    VoucherComponent
+
    ],
   imports: [
     BrowserModule,

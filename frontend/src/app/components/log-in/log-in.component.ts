@@ -12,6 +12,7 @@ import { User } from './../../models/user';
 })
 
 export class LogInComponent implements OnInit{
+  hide = true;
   email = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
   user = {} as User;
