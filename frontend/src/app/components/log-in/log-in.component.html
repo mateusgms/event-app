@@ -33,22 +33,129 @@
             </div>
         </form> -->
         <div class="viewer-wrapper">
+            <div class="viewer-title">
+                <div class="viewer-title-text">
+                    Faça seu login
+                </div>
+            </div>
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="viewer-body">
                 <mat-form-field appearance="standard">
-                    <mat-label>Email</mat-label>
+                    <mat-label>Nome de usuário ou Email</mat-label>
                     <input matInput type="text" [formControl]="email" class="form-control"/>
                 </mat-form-field>
                 <mat-form-field appearance="standard">
                         <mat-label>Senha</mat-label>
-                        <input matInput type="password" [formControl]="password" class="form-control"/>
+                        <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" class="form-control"/>
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
                 </mat-form-field>
-                <button mat-raised-button type="submit" color="primary">Log IN</button>
+                <button mat-raised-button type="submit" color="primary">Continuar</button>
             </form>
+            <div style="margin-left: 30px;">
+                <a [routerLink]="['/']">Esqueci minha senha > </a>
+            </div>
         </div>
     </mat-tab>
 
     <mat-tab label="Registre-se">
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="viewer-wrapper">
+            <div class="viewer-title">
+                <div class="viewer-title-text">
+                    Faça seu cadastro
+                </div>
+            </div>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="viewer-body">
+                <mat-form-field appearance="standard">
+                        <mat-label>Nome</mat-label>
+                        <input matInput type="text" formControlName="firstName" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">Nome is required</div>
+                        </div>
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                    <mat-label>Data de Aniversário</mat-label>
+                    <input matInput type="date" formControlName="dob" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
+                    <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                        <div *ngIf="f.dob.errors.required">Data de Aniversário is required</div>
+                        <div *ngIf="f.dob.errors.pattern">Data de Aniversário must be a valid date in the format
+                            YYYY-MM-DD</div>
+                    </div>
+                </mat-form-field>
+                <mat-form-field appearance="standard">                        <mat-label>Email</mat-label>
+                    <input matInput type="text" formControlName="email" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    </div>
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                    <mat-label>Telefone</mat-label>
+                    <input matInput type="tel" formControlName="phone" class="form-control" placeholder="(99)99999-9999"
+                        [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+                    <mat-icon matSuffix>phone</mat-icon>
+                    <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                        <div *ngIf="f.phone.errors.required">Telefone is required</div>
+                    </div>
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                    <mat-label>País</mat-label>
+                    <input matInput type="text" formControlName="country" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+                    <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                        <div *ngIf="f.country.errors.required">País is required</div>
+                    </div>
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                    <mat-label>Uf</mat-label>
+                    <input matInput type="text" formControlName="uf" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.uf.errors }" />
+                    <div *ngIf="submitted && f.uf.errors" class="invalid-feedback">
+                        <div *ngIf="f.uf.errors.required">Uf is required</div>
+                    </div>
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                    <mat-label>Endereço</mat-label>
+                    <input matInput type="text" formControlName="address" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+                    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                        <div *ngIf="f.address.errors.required">Endereço is required</div>
+                    </div>
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                    <mat-label>Senha</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Senha is required</div>
+                        <div *ngIf="f.password.errors.minlength">Senha must be at least 6 characters</div>
+                    </div>
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                    <mat-label>Confirmar Senha</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                        <div *ngIf="f.confirmPassword.errors.required">Confirmar Senha is required</div>
+                        <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                    </div>
+                </mat-form-field>
+                <div class="text-center">
+                    <button mat-raised-button type="submit" color="primary" style="margin-right: 10px;">Continuar</button>
+                    <button mat-raised-button type="reset" (click)="onReset()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+        <!-- <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="form-row">
 
                 <div class="form-group col-5">
@@ -137,7 +244,7 @@
                 <button class="btn btn-primary mr-1">Register</button>
                 <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
             </div>
-        </form>
+        </form> -->
     </mat-tab>
 
 
