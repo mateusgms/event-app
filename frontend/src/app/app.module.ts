@@ -41,7 +41,7 @@ import {MatTableModule} from '@angular/material/table';
     EventComponent,
     BlogComponent,
     FootBarComponent,
-    SupportComponent
+    SupportComponent,
     ListUsersComponent
    ],
   imports: [
