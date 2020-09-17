@@ -10,19 +10,20 @@ import { UserService } from './../../services/user.service';
 export class ListUsersComponent implements OnInit {
   user = {} as User;
   users: User[];
+  displayedColumns: string[] = [ 'name', 'email'];
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.getUsers();
   }
-  getUsers() {
+  getUsers(): void {
     this.userService.getUsers().subscribe((users: User[]) => {
       this.users = users;
     });
   }
-  deleteUser(user: User){
-    this.userService.deleteUser(user).subscribe(()=> {
+  deleteUser(user: User): void {
+    this.userService.deleteUser(user).subscribe(() => {
       this.getUsers();
     });
   }

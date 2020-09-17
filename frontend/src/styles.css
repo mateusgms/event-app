@@ -31,3 +31,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-form-field {
     width: 100%;
 }
+table {
+    width: 100%;
+    margin: 30px;
+}
+caption{
+    color: rgba(0,0,0,.54);
+    font-size: large;
+    font-weight: 400;
+    text-align: left;
+}
