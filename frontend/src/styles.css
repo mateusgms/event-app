@@ -2,3 +2,30 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.viewer-wrapper{
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 4px;
+    margin: 24px;
+}
+.viewer-title-text{
+    flex: 1 1 auto;
+    display: block;
+    color: rgba(0,0,0,.54);
+    font-size: large;
+    font-weight: 400;
+}
+.viewer-title{
+    align-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 8px 8px 8px 16px;
+}
+.viewer-body{
+    max-width: 500px;
+    padding: 5px 10px 10px 30px;
+}
+mat-form-field {
+    width: 100%;
+}

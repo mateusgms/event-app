@@ -1,12 +1,18 @@
-<form>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Nome">
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Leave a comment</mat-label>
-    <textarea matInput placeholder="Como podemos te ajudar?"></textarea>
-  </mat-form-field>
-  <button type="submit">Enviar</button>
-</form>
+<div class="viewer-wrapper">
+  <div class="viewer-title">
+    <div class="viewer-title-text">
+      Fale conosco
+    </div>
+  </div>
+  <form class="viewer-body">
+    <mat-form-field appearance="standard">
+      <mat-label>Nome</mat-label>
+      <input matInput [formControl]="name" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Como podemos te ajudar?</mat-label>
+      <textarea matInput [formControl]="ticket" required style="min-height: 60px;"></textarea>
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary">Enviar</button>
+  </form>
+</div>
