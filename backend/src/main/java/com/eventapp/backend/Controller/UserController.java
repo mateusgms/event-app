@@ -23,14 +23,10 @@ public class UserController {
     private UserService service;
 
     // CREATE
-    @PostMapping("/addUser")
+    @PostMapping("/users")
     public User addUser(@RequestBody User user) {
  
         return service.saveUser(user);
-    }
-    @PostMapping("/addUsers")
-    public List<User> addUsers(@RequestBody List<User> users) {
-        return service.saveUsers(users);
     }
 
     // GET
@@ -38,23 +34,23 @@ public class UserController {
     public List<User> findAllUsers() {
         return service.getUsers();
     }
-    @GetMapping("/userById/{id}")
+    @GetMapping("/users/{id}")
     public User findUserById(@PathVariable int id) {
         return service.getUserById(id);
     }
-    @GetMapping("/user/{name}")
+    @GetMapping("/users/{name}")
     public User findUserByName(@PathVariable String name) {
         return service.getUserByName(name);
     }
 
     // PUT
-    @PutMapping("/updateUser")
+    @PutMapping("/users")
     public User updateUser(@RequestBody User user) {
         return service.updateUser(user);
     }
 
     // DELETE
-    @DeleteMapping("/deleteUser/{id}")
+    @DeleteMapping("/users/{id}")
     public String deleteUser(@PathVariable int id) {
         return service.deleteUser(id);
     }
