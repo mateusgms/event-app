@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.config.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -24,6 +24,7 @@
     "@angular/router": "~10.1.0",
     "@material/card": "^7.0.0",
     "@ngmodule/material-carousel": "^0.6.0",
+    "hammerjs": "^2.0.8",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

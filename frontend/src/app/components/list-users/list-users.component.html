@@ -1,3 +1,12 @@
-<p>
-  list-users works!
-</p>
+<table  class="mat-elevation-z8">
+  <thead>
+    <th> Name </th>
+    <th> E-mail </th>
+    <th>Ação</th>
+  </thead>
+  <tbody *ngFor="let user of users">
+    <td> {{user.name}} </td>
+    <td> {{user.email}} </td>
+    <td><button type="submit" (click)="deleteUser(user)">Deletar</button></td>
+  </tbody>
+</table>
