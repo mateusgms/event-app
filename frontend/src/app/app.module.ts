@@ -45,6 +45,7 @@ import { VoucherComponent } from './components/voucher/voucher.component';
     SupportComponent,
     ListUsersComponent,
     VoucherComponent
+
    ],
   imports: [
     BrowserModule,
