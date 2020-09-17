@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MustMatch } from '../../_helpers/must-match.validator';
 import {UserService} from './../../services/user.service'
@@ -11,8 +11,9 @@ import { User } from './../../models/user';
   styleUrls: ['./log-in.component.css']
 })
 
-export class LogInComponent {
-
+export class LogInComponent implements OnInit{
+  email = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
   user = {} as User;
   users: User[];
 

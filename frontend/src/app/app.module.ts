@@ -20,15 +20,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {HttpClientModule} from '@angular/common/http'
 import { FootBarComponent } from './components/foot-bar/foot-bar.component';
+import { SupportComponent } from './components/support/support.component';
 import {MatTableModule} from '@angular/material/table'; 
-
-
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import {MatTableModule} from '@angular/material/table';
     EventComponent,
     BlogComponent,
     FootBarComponent,
+    SupportComponent
     ListUsersComponent
    ],
   imports: [
@@ -53,6 +54,7 @@ import {MatTableModule} from '@angular/material/table';
     MatCarouselModule.forRoot(),
     MatTabsModule,
     MatFormFieldModule,
+    MatInputModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
