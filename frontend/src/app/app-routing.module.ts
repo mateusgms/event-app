@@ -9,6 +9,8 @@ import { BlogDetailsComponent } from './components/blog-details/blog-details.com
 import { SupportComponent } from './components/support/support.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { VoucherComponent } from './components/voucher/voucher.component';
+import { ListBlogsComponent } from './components/list-blogs/list-blogs.component';
+import { ListEventsComponent } from './components/list-events/list-events.component';
 
 const routes: Routes = [
   {
@@ -40,12 +42,20 @@ const routes: Routes = [
     component: SupportComponent
   },
   {
+    path: 'voucher',
+    component: VoucherComponent
+  },
+  {
     path: 'listusers',
     component: ListUsersComponent
   },
   {
-    path: 'voucher',
-    component: VoucherComponent
+    path: 'listblogs',
+    component: ListBlogsComponent
+  },
+  {
+    path: 'listevents',
+    component: ListEventsComponent
   }
 ];
 

@@ -7,8 +7,8 @@ export interface User {
     address: string;
     uf: string;
     country: string;
-	password: string;
-	date: Date;
-	isAdmin: boolean;
+    password: string;
+    date: Date;
+    isAdmin: boolean;
 
 }
