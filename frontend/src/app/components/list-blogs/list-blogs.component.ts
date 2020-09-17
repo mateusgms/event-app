@@ -10,19 +10,20 @@ import { BlogService } from './../../services/blog.service';
 export class ListBlogsComponent implements OnInit {
   blog = {} as Blog;
   blogs: Blog[];
+  displayedColumns: string[] = [ 'imgURL', 'title'];
 
   constructor(private blogService: BlogService) { }
 
   ngOnInit(): void {
     this.getBlogs();
   }
-  getBlogs() {
+  getBlogs(): void {
     this.blogService.getBlogs().subscribe((blogs: Blog[]) => {
       this.blogs = blogs;
     });
   }
-  deleteBlog(blog: Blog){
-    this.blogService.deleteBlog(blog).subscribe(()=> {
+  deleteBlog(blog: Blog): void{
+    this.blogService.deleteBlog(blog).subscribe(() => {
       this.getBlogs();
     });
   }
