@@ -6,6 +6,7 @@ import { EventComponent } from './components/event/event.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
+import { ListUsersComponent } from './components/list-users/list-users.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LogInComponent
+  },
+  {
+    path:'listusers',
+    component: ListUsersComponent
   }
 ];
 

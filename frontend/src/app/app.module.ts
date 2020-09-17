@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LogInComponent } from './components/log-in/log-in.component';
+import { ListUsersComponent } from "./components/list-users/list-users.component";
 
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -23,7 +24,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
+import {HttpClientModule} from '@angular/common/http'
 import { FootBarComponent } from './components/foot-bar/foot-bar.component';
+import {MatTableModule} from '@angular/material/table'; 
 
 
 
@@ -37,7 +40,8 @@ import { FootBarComponent } from './components/foot-bar/foot-bar.component';
     BlogDetailsComponent,
     EventComponent,
     BlogComponent,
-    FootBarComponent
+    FootBarComponent,
+    ListUsersComponent
    ],
   imports: [
     BrowserModule,
@@ -54,6 +58,8 @@ import { FootBarComponent } from './components/foot-bar/foot-bar.component';
     MatButtonModule,
     MatListModule,
     MatGridListModule,
+    HttpClientModule,
+    MatTableModule,
     //FootBarComponent
   ],
   providers: [],

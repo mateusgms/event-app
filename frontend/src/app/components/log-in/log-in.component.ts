@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MustMatch } from '../../_helpers/must-match.validator';
+import {UserService} from './../../services/user.service'
+import { User } from './../../models/user';
 
 @Component({
   selector: 'app-log-in',
@@ -10,12 +12,26 @@ import { MustMatch } from '../../_helpers/must-match.validator';
 })
 
 export class LogInComponent {
+
+  user = {} as User;
+  users: User[];
+
   registerForm: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService
+     ) { }
+
+
+  
+
 
   ngOnInit(): void {
+    
+    this.getUsers();
+
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       dob: ['', [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
@@ -33,19 +49,26 @@ export class LogInComponent {
     });
   }
 
+  getUsers() {
+    this.userService.getUsers().subscribe((users: User[]) => {
+      this.users = users;
+    })
+  }
+
   // convenience getter for easy access to form fields
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
     if (this.registerForm.invalid) {
-      return;
+      return ;
     }
-
-    // display form values on success
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+    else{
+      alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+      return this.userService.saveUser(this.user).subscribe()
+    }
+    
   }
 
   onReset() {
