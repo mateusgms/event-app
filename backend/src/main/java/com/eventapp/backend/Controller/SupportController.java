@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+@CrossOrigin
 @RestController
 public class SupportController {
 
@@ -21,14 +23,10 @@ public class SupportController {
     private SupportService service;
 
     // CREATE
-    @PostMapping("/addSupport")
+    @PostMapping("/supports")
     public Support addSupport(@RequestBody Support support) {
  
         return service.saveSupport(support);
-    }
-    @PostMapping("/addSupports")
-    public List<Support> addSupports(@RequestBody List<Support> supports) {
-        return service.saveSupports(supports);
     }
 
     // GET
@@ -36,7 +34,7 @@ public class SupportController {
     public List<Support> findAllSupports() {
         return service.getSupports();
     }
-    @GetMapping("/supportById/{id}")
+    @GetMapping("/supports/{id}")
     public Support findSupportById(@PathVariable int id) {
         return service.getSupportById(id);
     }
@@ -48,13 +46,13 @@ public class SupportController {
     */
     
     // PUT
-    @PutMapping("/updateSupport")
+    @PutMapping("/supports")
     public Support updateSupport(@RequestBody Support support) {
         return service.updateSupport(support);
     }
 
     // DELETE
-    @DeleteMapping("/deleteSupport/{id}")
+    @DeleteMapping("/supports/{id}")
     public String deleteSupport(@PathVariable int id) {
         return service.deleteSupport(id);
     }
