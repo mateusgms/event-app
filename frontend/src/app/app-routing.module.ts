@@ -8,6 +8,7 @@ import { EventDetailsComponent } from './components/event-details/event-details.
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 import { SupportComponent } from './components/support/support.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
+import { VoucherComponent } from './components/voucher/voucher.component';
 
 const routes: Routes = [
   {
@@ -39,8 +40,12 @@ const routes: Routes = [
     component: SupportComponent
   },
   {
-    path:'listusers',
+    path: 'listusers',
     component: ListUsersComponent
+  },
+  {
+    path: 'voucher',
+    component: VoucherComponent
   }
 ];
 
