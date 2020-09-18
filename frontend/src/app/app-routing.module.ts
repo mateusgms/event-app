@@ -11,6 +11,7 @@ import { ListUsersComponent } from './components/list-users/list-users.component
 import { VoucherComponent } from './components/voucher/voucher.component';
 import { ListBlogsComponent } from './components/list-blogs/list-blogs.component';
 import { ListEventsComponent } from './components/list-events/list-events.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: 'listevents',
     component: ListEventsComponent
+  },
+  {
+    path:'dashboard',
+    component: DashboardComponent
   }
 ];
 

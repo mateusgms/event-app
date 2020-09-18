@@ -32,15 +32,13 @@ export class LogInComponent implements OnInit{
 
   ngOnInit(): void {
     
-    this.getUsers();
-
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       dob: ['', [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
-      phone:['', [Validators.required, ]],
+      phone:['', [Validators.required, Validators.pattern("(09)[0-9 ]{9}")]],
       address:['', [Validators.required]],
       uf:['', [Validators.required, Validators.maxLength(2)]],
       country: ['', [Validators.required]],

@@ -41,6 +41,7 @@ public class Blog {
 	}
 
 	public User getAuthor() {
+
 		return author;
 	}
 
