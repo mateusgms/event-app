@@ -9,7 +9,7 @@ import { Blog } from '../models/blog';
 })
 
 export class BlogService {
-    url = 'https://event-app3.herokuapp.com/';
+    url = 'https://event-app3.herokuapp.com/blogs';
 
     constructor(private httpClient: HttpClient){}
 
@@ -18,34 +18,34 @@ export class BlogService {
     };
 
     getBlogs(): Observable<Blog[]> {
-        return this.httpClient.get<Blog[]>(this.url + 'blogs')
+        return this.httpClient.get<Blog[]>(this.url)
           .pipe(
             retry(2),
             catchError(this.handleError));
     }
     getBlogById(id: number): Observable<Blog> {
-        return this.httpClient.get<Blog>(this.url + 'blogs/' + id)
+        return this.httpClient.get<Blog>(this.url + '/id/' + id)
             .pipe(
                 retry(2),
                 catchError(this.handleError)
             );
     }
     saveBlog(blog: Blog): Observable<Blog> {
-        return this.httpClient.post<Blog>(this.url + 'blogs', JSON.stringify(blog), this.httpOptions)
+        return this.httpClient.post<Blog>(this.url, JSON.stringify(blog), this.httpOptions)
             .pipe(
                 retry(2),
                 catchError(this.handleError)
             );
     }
     updateBlog(blog: Blog ): Observable<Blog>{
-        return this.httpClient.put<Blog>(this.url + 'blogs/' + blog.id, JSON.stringify(blog), this.httpOptions)
+        return this.httpClient.put<Blog>(this.url + '/id/' + blog.id, JSON.stringify(blog), this.httpOptions)
         .pipe(
             retry(1),
             catchError(this.handleError)
         );
     }
     deleteBlog(blog: Blog){
-        return this.httpClient.delete<Blog>(this.url + 'blogs/' + blog.id, this.httpOptions)
+        return this.httpClient.delete<Blog>(this.url + '/id/' + blog.id, this.httpOptions)
             .pipe(
                 retry(1),
                 catchError(this.handleError)

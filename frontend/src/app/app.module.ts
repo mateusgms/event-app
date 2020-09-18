@@ -10,7 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LogInComponent } from './components/log-in/log-in.component';
-import { ListUsersComponent } from "./components/list-users/list-users.component";
+import { ListUsersComponent } from './components/list-users/list-users.component';
+import { ListEventsComponent } from './components/list-events/list-events.component';
+import { ListBlogsComponent } from './components/list-blogs/list-blogs.component';
 
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,10 +27,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
-import {HttpClientModule} from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 import { FootBarComponent } from './components/foot-bar/foot-bar.component';
 import { SupportComponent } from './components/support/support.component';
-import {MatTableModule} from '@angular/material/table'; 
+import { MatTableModule } from '@angular/material/table';
 import { VoucherComponent } from './components/voucher/voucher.component';
 
 @NgModule({
@@ -44,6 +46,8 @@ import { VoucherComponent } from './components/voucher/voucher.component';
     FootBarComponent,
     SupportComponent,
     ListUsersComponent,
+    ListEventsComponent,
+    ListBlogsComponent,
     VoucherComponent
 
    ],
@@ -65,7 +69,6 @@ import { VoucherComponent } from './components/voucher/voucher.component';
     MatGridListModule,
     HttpClientModule,
     MatTableModule,
-    //FootBarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

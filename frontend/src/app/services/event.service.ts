@@ -9,7 +9,7 @@ import { Event } from '../models/event';
 })
 
 export class EventService {
-    url = 'https://event-app3.herokuapp.com/';
+    url = 'https://event-app3.herokuapp.com/events';
 
     constructor(private httpClient: HttpClient){}
 
@@ -18,34 +18,34 @@ export class EventService {
     };
 
     getEvents(): Observable<Event[]> {
-        return this.httpClient.get<Event[]>(this.url + 'events')
+        return this.httpClient.get<Event[]>(this.url)
           .pipe(
             retry(2),
             catchError(this.handleError));
     }
     getEventById(id: number): Observable<Event> {
-        return this.httpClient.get<Event>(this.url + 'events/' + id)
+        return this.httpClient.get<Event>(this.url + '/id' + id)
             .pipe(
                 retry(2),
                 catchError(this.handleError)
             );
     }
     saveEvent(event: Event): Observable<Event> {
-        return this.httpClient.post<Event>(this.url + 'events', JSON.stringify(event), this.httpOptions)
+        return this.httpClient.post<Event>(this.url, JSON.stringify(event), this.httpOptions)
             .pipe(
                 retry(2),
                 catchError(this.handleError)
             );
     }
     updateEvent(event: Event ): Observable<Event>{
-        return this.httpClient.put<Event>(this.url + 'events/' + event.id, JSON.stringify(event), this.httpOptions)
+        return this.httpClient.put<Event>(this.url + '/id/' + event.id, JSON.stringify(event), this.httpOptions)
         .pipe(
             retry(1),
             catchError(this.handleError)
         );
     }
     deleteEvent(event: Event){
-        return this.httpClient.delete<Event>(this.url + 'events/' + event.id, this.httpOptions)
+        return this.httpClient.delete<Event>(this.url + '/id/' + event.id, this.httpOptions)
             .pipe(
                 retry(1),
                 catchError(this.handleError)
