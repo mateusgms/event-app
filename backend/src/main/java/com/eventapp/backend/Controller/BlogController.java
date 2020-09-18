@@ -34,11 +34,11 @@ public class BlogController {
     public List<Blog> findAllBlogs() {
         return service.getBlogs();
     }
-    @GetMapping("/blogs/{id}")
+    @GetMapping("/blogs/id/{id}")
     public Blog findBlogById(@PathVariable int id) {
         return service.getBlogById(id);
     }
-    @GetMapping("/blogs/{title}")
+    @GetMapping("/blogs/title/{title}")
     public Blog findBlogByTitle(@PathVariable String title) {
         return service.getBlogByTitle(title);
     }

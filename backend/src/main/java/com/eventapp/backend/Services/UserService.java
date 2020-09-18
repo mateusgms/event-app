@@ -26,8 +26,8 @@ public class UserService {
     public User getUserById(int id){
         return repository.findById(id).orElse(null);
     }
-    public User getUserByName(String name){
-        return repository.findByName(name);
+    public User getUserByEmail(String email){
+        return repository.findByEmail(email);
     }
     public String deleteUser(int id){
         repository.deleteById(id);

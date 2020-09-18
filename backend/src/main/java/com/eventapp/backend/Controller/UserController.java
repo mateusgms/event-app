@@ -34,15 +34,14 @@ public class UserController {
     public List<User> findAllUsers() {
         return service.getUsers();
     }
-    @GetMapping("/users/{id}")
+    @GetMapping("/users/id/{id}")
     public User findUserById(@PathVariable int id) {
         return service.getUserById(id);
     }
-    @GetMapping("/users/{name}")
-    public User findUserByName(@PathVariable String name) {
-        return service.getUserByName(name);
+    @GetMapping("/users/email/{email}")
+    public User findUserByEmail(@PathVariable String email) {
+        return service.getUserByEmail(email);
     }
-
     // PUT
     @PutMapping("/users")
     public User updateUser(@RequestBody User user) {
