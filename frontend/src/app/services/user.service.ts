@@ -24,7 +24,7 @@ export class UserService {
             catchError(this.handleError));
     }
     getUserById(id: number): Observable<User> {
-        return this.httpClient.get<User>(this.url + '/' + id)
+        return this.httpClient.get<User>(this.url + '/id/' + id)
             .pipe(
                 retry(2),
                 catchError(this.handleError)
@@ -38,14 +38,14 @@ export class UserService {
             );
     }
     updateUser(user: User ): Observable<User>{
-        return this.httpClient.put<User>(this.url + '/' + user.id, JSON.stringify(user), this.httpOptions)
+        return this.httpClient.put<User>(this.url + '/id/' + user.id, JSON.stringify(user), this.httpOptions)
         .pipe(
             retry(1),
             catchError(this.handleError)
         );
     }
     deleteUser(user: User){
-        return this.httpClient.delete<User>(this.url + '/' + user.id, this.httpOptions)
+        return this.httpClient.delete<User>(this.url + '/id/' + user.id, this.httpOptions)
             .pipe(
                 retry(1),
                 catchError(this.handleError)
