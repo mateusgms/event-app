@@ -34,7 +34,7 @@ public class SupportController {
     public List<Support> findAllSupports() {
         return service.getSupports();
     }
-    @GetMapping("/supports/{id}")
+    @GetMapping("/supports/id/{id}")
     public Support findSupportById(@PathVariable int id) {
         return service.getSupportById(id);
     }

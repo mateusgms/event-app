@@ -37,7 +37,7 @@ public class VoucherController {
         return service.getVouchers();
     }
 
-    @GetMapping(value="/vouchers/{id}")
+    @GetMapping(value="/vouchers/id/{id}")
     public Voucher getVoucherById(@RequestParam int id) {
         return service.getVoucherById(id);
     }
