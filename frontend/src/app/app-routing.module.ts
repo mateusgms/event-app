@@ -12,6 +12,8 @@ import { VoucherComponent } from './components/voucher/voucher.component';
 import { ListBlogsComponent } from './components/list-blogs/list-blogs.component';
 import { ListEventsComponent } from './components/list-events/list-events.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddBlogComponent } from './components/add-blog/add-blog.component';
+import { AddEventComponent } from './components/add-event/add-event.component';
 
 const routes: Routes = [
   {
@@ -19,7 +21,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'blog',
+    path: 'post',
     component: BlogComponent
   },
   {
@@ -51,7 +53,7 @@ const routes: Routes = [
     component: ListUsersComponent
   },
   {
-    path: 'listblogs',
+    path: 'listposts',
     component: ListBlogsComponent
   },
   {
@@ -59,9 +61,17 @@ const routes: Routes = [
     component: ListEventsComponent
   },
   {
-    path:'dashboard',
+    path: 'dashboard',
     component: DashboardComponent
-  }
+  },
+  {
+    path: 'addpost',
+    component: AddBlogComponent
+  },
+  {
+    path: 'addevent',
+    component: AddEventComponent
+  },
 ];
 
 @NgModule({

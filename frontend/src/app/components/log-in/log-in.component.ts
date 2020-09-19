@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MustMatch } from '../../_helpers/must-match.validator';
-import {UserService} from './../../services/user.service'
+import { UserService } from './../../services/user.service';
 import { User } from './../../models/user';
 
 @Component({
@@ -27,32 +27,31 @@ export class LogInComponent implements OnInit{
      ) { }
 
 
-  
+
 
 
   ngOnInit(): void {
-    
+
     this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
+      Name: ['', Validators.required],
       dob: ['', [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
-      phone:['', [Validators.required, Validators.pattern("(09)[0-9 ]{9}")]],
-      address:['', [Validators.required]],
-      uf:['', [Validators.required, Validators.maxLength(2)]],
+      phone: ['', [Validators.required, Validators.pattern("(09)[0-9 ]{9}")]],
+      address: ['', [Validators.required]],
+      uf: ['', [Validators.required, Validators.maxLength(2)]],
       country: ['', [Validators.required]],
 
-      
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });
   }
 
-  getUsers() {
+  getUsers(): void {
     this.userService.getUsers().subscribe((users: User[]) => {
       this.users = users;
-    })
+    });
   }
 
   // convenience getter for easy access to form fields
@@ -66,12 +65,11 @@ export class LogInComponent implements OnInit{
     }
     else{
       alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-      return this.userService.saveUser(this.user).subscribe()
+      return this.userService.saveUser(this.user).subscribe();
     }
-    
   }
 
-  onReset() {
+  onReset(): void {
     this.submitted = false;
     this.registerForm.reset();
   }
