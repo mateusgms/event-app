@@ -10,7 +10,7 @@ import { EventService } from './../../services/event.service';
 export class ListEventsComponent implements OnInit {
   event = {} as Event;
   events: Event[];
-  displayedColumns: string[] = [ 'imgURL', 'title'];
+  displayedColumns: string[] = [ 'imageURL', 'title'];
 
   constructor(private eventService: EventService) { }
 

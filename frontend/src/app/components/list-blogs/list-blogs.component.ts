@@ -10,7 +10,7 @@ import { BlogService } from './../../services/blog.service';
 export class ListBlogsComponent implements OnInit {
   blog = {} as Blog;
   blogs: Blog[];
-  displayedColumns: string[] = [ 'imgURL', 'title'];
+  displayedColumns: string[] = [ 'imageURL', 'title'];
 
   constructor(private blogService: BlogService) { }
 
@@ -27,5 +27,4 @@ export class ListBlogsComponent implements OnInit {
       this.getBlogs();
     });
   }
-
 }
