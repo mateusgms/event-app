@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { slides } from '../../slides';
-import { events } from '../../events';
-import { posts } from '../../posts';
+import { EventService } from 'src/app/services/event.service';
+import { Event } from './../../models/event';
+import { BlogService } from 'src/app/services/blog.service';
+import { Blog } from './../../models/blog';
 
 
 @Component({
@@ -12,12 +14,29 @@ import { posts } from '../../posts';
 })
 export class HomeComponent implements OnInit {
   slides = slides;
-  events = events;
-  posts = posts;
+  event = {} as Event;
+  events: Event[];
+  post = {} as Blog;
+  posts: Blog[];
 
-  constructor() { }
+  constructor(
+    private eventService: EventService,
+    private blogService: BlogService
+    ) { }
 
   ngOnInit(): void {
+    this.getEvents();
+    this.getBlogs();
+  }
+  getEvents(): void {
+    this.eventService.getEvents().subscribe((events: Event[]) => {
+      this.events = events;
+    });
+  }
+  getBlogs(): void {
+    this.blogService.getBlogs().subscribe((blogs: Blog[]) => {
+      this.posts = blogs;
+    });
   }
 
 }

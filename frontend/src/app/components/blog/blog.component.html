@@ -1,11 +1,11 @@
 <mat-list>
   <div mat-subheader>Novidades</div>
-  <mat-list-item [routerLink]="['/post',postId]" *ngFor="let post of posts; index as postId">
+  <mat-list-item [routerLink]="['/post',post.id]" *ngFor="let post of posts;">
     <div mat-list-icon>
       <img src="{{post.imageURL}}">
     </div>
     <h3 matLine> {{post.title}} </h3>
-    <p matLine> {{post.description}} </p>
+    <p matLine> {{post.summary}} </p>
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>

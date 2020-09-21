@@ -24,7 +24,7 @@ export class EventService {
             catchError(this.handleError));
     }
     getEventById(id: number): Observable<Event> {
-        return this.httpClient.get<Event>(this.url + '/id' + id)
+        return this.httpClient.get<Event>(this.url + '/id/' + id)
             .pipe(
                 retry(2),
                 catchError(this.handleError)
