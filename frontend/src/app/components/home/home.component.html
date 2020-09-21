@@ -28,11 +28,11 @@
   <a [routerLink]="['/event']">Veja mais >></a>
 
   <div fxLayout='row' fxLayoutAlign="space-around center" class="cards">
-    <div fxFlex="20" class="card" *ngFor="let event of events; index as eventId">
+    <div fxFlex="20" class="card" *ngFor="let event of events;">
       <mat-card>
         <img mat-card-image src="{{event.imageURL}}">
         <mat-card-header>
-          <mat-card-title><a [title]="event.title" [routerLink]="['/event',eventId]"> {{event.title}}</a></mat-card-title>
+          <mat-card-title><a [title]="event.title" [routerLink]="['/event',event.id]"> {{event.title}}</a></mat-card-title>
         </mat-card-header>
         <mat-card-content>
           {{event.description}}
@@ -46,15 +46,15 @@
 <div style="padding: 20px;">
   <a [routerLink]="['/post']">Veja mais >></a>
   <div fxLayout='row' fxLayoutWrap class="cards" >
-    <div fxFlex="20" class="card" *ngFor="let post of posts; index as postId">
+    <div fxFlex="20" class="card" *ngFor="let post of posts;">
       <mat-card>
 
         <img mat-card-image src="{{post.imageURL}}">
         <mat-card-header>
-          <mat-card-title><a [title]="post.title" [routerLink]="['/post',postId]"> {{post.title}}</a></mat-card-title>
+          <mat-card-title><a [title]="post.title" [routerLink]="['/post',post.id]"> {{post.title}}</a></mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          {{post.description}}
+          {{post.summary}}
         </mat-card-content>
       </mat-card>
     </div>

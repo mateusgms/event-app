@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Blog } from './../../models/blog';
 import { BlogService } from './../../services/blog.service';
 
@@ -8,8 +9,8 @@ import { BlogService } from './../../services/blog.service';
   styleUrls: ['./list-blogs.component.css']
 })
 export class ListBlogsComponent implements OnInit {
-  blog = {} as Blog;
-  blogs: Blog[];
+  post = {} as Blog;
+  posts: Blog[];
   displayedColumns: string[] = [ 'imageURL', 'title'];
 
   constructor(private blogService: BlogService) { }
@@ -19,7 +20,7 @@ export class ListBlogsComponent implements OnInit {
   }
   getBlogs(): void {
     this.blogService.getBlogs().subscribe((blogs: Blog[]) => {
-      this.blogs = blogs;
+      this.posts = blogs;
     });
   }
   deleteBlog(blog: Blog): void{

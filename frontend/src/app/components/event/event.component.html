@@ -1,6 +1,6 @@
 <mat-list>
   <div mat-subheader>Eventos</div>
-  <mat-list-item [routerLink]="['/event',eventId]" *ngFor="let event of events; index as eventId">
+  <mat-list-item [routerLink]="['/event',event.id]" *ngFor="let event of events;">
     <div mat-list-icon>
       <img src="{{event.imageURL}}">
     </div>

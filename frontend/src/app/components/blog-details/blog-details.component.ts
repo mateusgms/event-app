@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { posts } from '../../posts';
-
+import { BlogService } from './../../services/blog.service';
+import { Blog } from './../../models/blog';
 
 @Component({
   selector: 'app-blog-details',
@@ -10,16 +10,21 @@ import { posts } from '../../posts';
   styleUrls: ['./blog-details.component.css']
 })
 export class BlogDetailsComponent implements OnInit {
-  post;
+  post: Blog;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private blogService: BlogService
   ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.post = posts[+params.get('postId')];
+      this.getBlogById(+params.get('postId'));
     });
   }
-
+  getBlogById(postId: number): void {
+    this.blogService.getBlogById(postId).subscribe((post: Blog) => {
+      this.post = post;
+    });
+    }
 }

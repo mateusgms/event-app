@@ -1,5 +1,11 @@
-<div>
-    <h1>{{ post.title }}</h1>
-    <img src="{{post.imageURL}}">
-    <p>{{ post.description }}</p>
+<div class="viewer-wrapper">
+    <div class="viewer-title">
+        <div class="viewer-title-text">
+            {{ post.title }}
+        </div>
+    </div>
+    <div class="viewer-body">
+        <img src="{{ post.imageURL }}">
+        <p>{{ post.text }}</p>
+    </div>
 </div>
