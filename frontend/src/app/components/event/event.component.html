@@ -1,11 +1,17 @@
-<mat-list>
-  <div mat-subheader>Eventos</div>
-  <mat-list-item [routerLink]="['/event',event.id]" *ngFor="let event of events;">
-    <div mat-list-icon>
-      <img src="{{event.imageURL}}">
+<div class="viewer-wrapper">
+  <div class="viewer-title">
+    <div class="viewer-title-text">
+      Eventos
     </div>
-    <h3 matLine> {{event.title}} </h3>
-    <p matLine> {{event.description}} </p>
-    <mat-divider></mat-divider>
-  </mat-list-item>
-</mat-list>
+  </div>
+  <mat-list>
+    <mat-list-item [routerLink]="['/event',event.id]" *ngFor="let event of events;">
+      <div mat-list-icon>
+        <img src="{{event.imageURL}}">
+      </div>
+      <h3 matLine> {{event.title}} </h3>
+      <p matLine> {{event.description}} </p>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</div>
