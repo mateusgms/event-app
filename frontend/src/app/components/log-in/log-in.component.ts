@@ -5,6 +5,7 @@ import { MustMatch } from '../../_helpers/must-match.validator';
 import { UserService } from './../../services/user.service';
 import { User } from './../../models/user';
 
+
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
@@ -18,6 +19,7 @@ export class LogInComponent implements OnInit{
   user = {} as User;
   users: User[];
 
+  loginForm: FormGroup;
   registerForm: FormGroup;
   submitted = false;
 
@@ -31,14 +33,16 @@ export class LogInComponent implements OnInit{
 
 
   ngOnInit(): void {
-
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+    })
     this.registerForm = this.formBuilder.group({
-      Name: ['', Validators.required],
-      dob: ['', [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
+      name: ['', Validators.required],
+      date: ['', [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern("(09)[0-9 ]{9}")]],
+      phone: ['', [Validators.required, ]],
       address: ['', [Validators.required]],
       uf: ['', [Validators.required, Validators.maxLength(2)]],
       country: ['', [Validators.required]],
@@ -57,18 +61,28 @@ export class LogInComponent implements OnInit{
   // convenience getter for easy access to form fields
   get f() { return this.registerForm.controls; }
 
-  onSubmit() {
+  onSubmit(): any {
     this.submitted = true;
 
     if (this.registerForm.invalid) {
+      alert('vim aqui')
       return ;
     }
     else{
-      alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-      return this.userService.saveUser(this.user).subscribe();
+      //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+      return this.userService.saveUser(this.user = this.registerForm.value).subscribe((user: User)=>{
+        this.user = user;
+      });
     }
   }
+  loginSubmit(): any{
+    if(this.loginForm.invalid){
+      alert('deu ruim')
+      return;
+    }else{
 
+    }
+  }
   onReset(): void {
     this.submitted = false;
     this.registerForm.reset();
