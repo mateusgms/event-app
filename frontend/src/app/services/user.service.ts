@@ -14,7 +14,7 @@ export class UserService {
     constructor(private httpClient: HttpClient){}
 
     httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'appication/json'})
+        headers: new HttpHeaders({ 'Content-Type': 'application/json'})
     };
 
     getUsers(): Observable<User[]> {
@@ -31,6 +31,7 @@ export class UserService {
             );
     }
     saveUser(user: User): Observable<User> {
+        alert(JSON.stringify(user))
         return this.httpClient.post<User>(this.url , JSON.stringify(user), this.httpOptions)
             .pipe(
                 retry(2),

@@ -10,8 +10,8 @@
             </div>
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="viewer-body">
                 <mat-form-field appearance="standard">
-                    <mat-label>Nome de usuário ou Email</mat-label>
-                    <input matInput type="text" [formControl]="email" class="form-control"/>
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" [formControl]="email" class="form-control"/>
                 </mat-form-field>
                 <mat-form-field appearance="standard">
                     <mat-label>Senha</mat-label>
@@ -26,38 +26,6 @@
                 <a [routerLink]="['/']">Esqueci minha senha > </a>
             </div>
         </div>
-
-        <!-- Antigo Login -->
-        <!-- <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>Email</label>
-                    <input type="text" formControlName="email" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.required">Email is required</div>
-                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>Senha</label>
-                    <input type="password" formControlName="password" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Senha is required</div>
-                        <div *ngIf="f.password.errors.minlength">Senha must be at least 6 characters</div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="text-center">
-                <button class="btn btn-primary mr-1">Log IN</button>
-                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
-            </div>
-        </form> -->
     </mat-tab>
 
     <!-- Registre-se -->
@@ -71,19 +39,19 @@
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="viewer-body">
                 <mat-form-field appearance="standard">
                     <mat-label>Nome</mat-label>
-                    <input matInput type="text" formControlName="Name" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
-                    <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
-                        <div *ngIf="f.Name.errors.required">Nome is required</div>
+                    <input matInput type="text" formControlName="name" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Nome is required</div>
                     </div>
                 </mat-form-field>
                 <mat-form-field appearance="standard">
                     <mat-label>Data de Aniversário</mat-label>
-                    <input matInput type="date" formControlName="dob" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
-                    <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
-                        <div *ngIf="f.dob.errors.required">Data de Aniversário is required</div>
-                        <div *ngIf="f.dob.errors.pattern">Data de Aniversário must be a valid date in the format
+                    <input matInput type="date" formControlName="date" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.date.errors }" />
+                    <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
+                        <div *ngIf="f.date.errors.required">Data de Aniversário is required</div>
+                        <div *ngIf="f.date.errors.pattern">Data de Aniversário must be a valid date in the format
                             YYYY-MM-DD</div>
                     </div>
                 </mat-form-field>
@@ -119,6 +87,7 @@
                     <div *ngIf="submitted && f.uf.errors" class="invalid-feedback">
                         <div *ngIf="f.uf.errors.required">Uf is required</div>
                     </div>
+
                 </mat-form-field>
                 <mat-form-field appearance="standard">
                     <mat-label>Endereço</mat-label>
@@ -158,97 +127,5 @@
                 </div>
             </form>
         </div>
-
-        <!-- Antigo Registre-se -->
-        <!-- <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            <div class="form-row">
-
-                <div class="form-group col-5">
-                    <label>Nome</label>
-                    <input type="text" formControlName="firstName" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                        <div *ngIf="f.firstName.errors.required">Nome is required</div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>Data de Aniversário</label>
-                    <input type="date" formControlName="dob" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
-                    <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
-                        <div *ngIf="f.dob.errors.required">Data de Aniversário is required</div>
-                        <div *ngIf="f.dob.errors.pattern">Data de Aniversário must be a valid date in the format
-                            YYYY-MM-DD</div>
-                    </div>
-                </div>
-                <div class="form-group col">
-                    <label>Email</label>
-                    <input type="text" formControlName="email" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.required">Email is required</div>
-                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                    </div>
-                </div>
-                <div class="form-group col-5">
-                    <label>Telefone</label>
-                    <input type="number" formControlName="phone" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
-                    <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
-                        <div *ngIf="f.phone.errors.required">Telefone is required</div>
-                    </div>
-                    <div class="form-group col-5">
-                        <label>Endereço</label>
-                        <input type="text" formControlName="address" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
-                        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
-                            <div *ngIf="f.address.errors.required">Endereço is required</div>
-                        </div>
-                    </div>
-                    <div class="form-group col-5">
-                        <label>Uf</label>
-                        <input type="text" formControlName="uf" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.uf.errors }" />
-                        <div *ngIf="submitted && f.uf.errors" class="invalid-feedback">
-                            <div *ngIf="f.uf.errors.required">Uf is required</div>
-                        </div>
-                    </div>
-                    <div class="form-group col-5">
-                        <label>País</label>
-                        <input type="text" formControlName="country" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
-                        <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
-                            <div *ngIf="f.country.errors.required">País is required</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>Senha</label>
-                    <input type="password" formControlName="password" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Senha is required</div>
-                        <div *ngIf="f.password.errors.minlength">Senha must be at least 6 characters</div>
-                    </div>
-                </div>
-                <div class="form-group col">
-                    <label>Confirm Senha</label>
-                    <input type="password" formControlName="confirmPassword" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-                    <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-                        <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-                        <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center">
-                <button class="btn btn-primary mr-1">Register</button>
-                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
-            </div>
-        </form> -->
     </mat-tab>
 </mat-tab-group>
