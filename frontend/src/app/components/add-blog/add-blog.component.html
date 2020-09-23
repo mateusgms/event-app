@@ -4,30 +4,30 @@
       Criar Post
     </div>
   </div>
-  <form class="viewer-body">
+  <form [formGroup]="newPostForm" (ngSubmit)="onSubmit()" class="viewer-body">
     <mat-form-field appearance="standard">
       <mat-label>Título do Post</mat-label>
-      <input matInput type="text" class="form-control"/>
+      <input matInput type="text" formControlName="title" class="form-control"/>
     </mat-form-field>
     <mat-form-field appearance="standard">
       <mat-label>Resumo do Post</mat-label>
-      <input matInput type="text" class="form-control"/>
+      <input matInput type="text" formControlName="summary" class="form-control"/>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Texto</mat-label>
-      <textarea matInput type="text" class="form-control" style="min-height: 60px;"></textarea>
+      <textarea matInput type="text" formControlName="text" class="form-control" style="min-height: 60px;"></textarea>
     </mat-form-field>
     <mat-form-field appearance="standard">
       <mat-label>Categoria do Post</mat-label>
-      <input matInput type="text" class="form-control"/>
+      <input matInput type="text" formControlName="category" class="form-control"/>
     </mat-form-field>
     <mat-form-field appearance="standard">
       <mat-label>URL da imagem do Post</mat-label>
-      <input matInput type="url" class="form-control"/>
+      <input matInput type="url" formControlName="imageURL" class="form-control"/>
     </mat-form-field>
     <mat-form-field appearance="standard">
       <mat-label>Data</mat-label>
-      <input matInput type="date" class="form-control"/>
+      <input matInput type="date" formControlName="date" class="form-control"/>
     </mat-form-field>
     <button mat-raised-button type="submit" color="primary">Continuar</button>
   </form>
