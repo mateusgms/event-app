@@ -4,13 +4,13 @@
       Fale conosco
     </div>
   </div>
-  <form class="viewer-body">
+  <form (ngSubmit)="onSubmit()" class="viewer-body">
     <mat-form-field appearance="standard">
-      <mat-label>Nome</mat-label>
-      <input matInput [formControl]="name" required>
+      <mat-label>Qual o Assunto?</mat-label>
+      <input matInput [formControl]="subject" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Como podemos te ajudar?</mat-label>
+      <mat-label>Descreva como podemos te ajudar.</mat-label>
       <textarea matInput [formControl]="ticket" required style="min-height: 60px;"></textarea>
     </mat-form-field>
     <button mat-raised-button type="submit" color="primary">Enviar</button>
