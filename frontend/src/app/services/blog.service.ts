@@ -14,7 +14,7 @@ export class BlogService {
     constructor(private httpClient: HttpClient){}
 
     httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'appication/json'})
+        headers: new HttpHeaders({ 'Content-Type': 'application/json'})
     };
 
     getBlogs(): Observable<Blog[]> {
@@ -30,8 +30,8 @@ export class BlogService {
                 catchError(this.handleError)
             );
     }
-    saveBlog(blog: Blog): Observable<Blog> {
-        return this.httpClient.post<Blog>(this.url, JSON.stringify(blog), this.httpOptions)
+    saveBlog(blog: Blog, userId: number): Observable<Blog> {
+        return this.httpClient.post<Blog>(this.url + '?userId=' + userId, JSON.stringify(blog), this.httpOptions)
             .pipe(
                 retry(2),
                 catchError(this.handleError)
