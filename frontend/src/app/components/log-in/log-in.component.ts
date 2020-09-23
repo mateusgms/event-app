@@ -3,7 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 import { MustMatch } from '../../_helpers/must-match.validator';
 import { UserService } from './../../services/user.service';
+import { AuthService } from './../../services/auth.service';
 import { User } from './../../models/user';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,9 +15,12 @@ import { User } from './../../models/user';
 })
 
 export class LogInComponent implements OnInit{
+
   hide = true;
+
   email = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
+
   user = {} as User;
   users: User[];
 
@@ -25,7 +30,9 @@ export class LogInComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService,
+    private router: Router,
      ) { }
 
 
@@ -75,12 +82,21 @@ export class LogInComponent implements OnInit{
       });
     }
   }
-  loginSubmit(): any{
+  loginSubmit(){
+
+    const val = this.loginForm.value;
+
     if(this.loginForm.invalid){
       alert('deu ruim')
       return;
-    }else{
-
+    } else{
+      if(val.email && val.password){
+        this.authService.login(val.email, val.password)
+          .subscribe(()=>{
+            alert('User logado');
+            this.router.navigateByUrl('/dashboard');
+          })
+      }
     }
   }
   onReset(): void {
