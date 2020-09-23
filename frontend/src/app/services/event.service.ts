@@ -14,7 +14,7 @@ export class EventService {
     constructor(private httpClient: HttpClient){}
 
     httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'appication/json'})
+        headers: new HttpHeaders({ 'Content-Type': 'application/json'})
     };
 
     getEvents(): Observable<Event[]> {

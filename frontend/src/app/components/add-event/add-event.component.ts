@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Event } from './../../models/event';
 import { EventService } from './../../services/event.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-event',
@@ -12,17 +13,17 @@ export class AddEventComponent implements OnInit {
 
   event = {} as Event;
   events: Event[];
-  registerForm: FormGroup;
+  newEventForm: FormGroup;
   submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private eventService: EventService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
 
-    this.registerForm = this.formBuilder.group({
+    this.newEventForm = this.formBuilder.group({
 
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -35,17 +36,19 @@ export class AddEventComponent implements OnInit {
 
     });
   }
-  
-  // convenience getter for easy access to form fields
-  get f() { return this.registerForm.controls; }
 
-  onSubmit() {
+  // convenience getter for easy access to form fields
+  get f() { return this.newEventForm.controls; }
+
+  onSubmit(): any {
     this.submitted = true;
-    if (this.registerForm.invalid) {
-      return ;
+    if (this.newEventForm.invalid) {
+      return;
     }
-    else{
-      return this.eventService.saveEvent(this.event).subscribe();
+    else {
+      return this.eventService.saveEvent(this.event = this.newEventForm.value).subscribe((event: Event) => {
+        this.event = event;
+      });
     }
   }
 }
