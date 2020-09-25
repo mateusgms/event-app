@@ -15,6 +15,7 @@ import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { FootBarComponent } from './components/foot-bar/foot-bar.component';
 import { VoucherComponent } from './components/voucher/voucher.component';
 import { SupportComponent } from './components/support/support.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 // Modules
 import { NgModule } from '@angular/core';
@@ -53,6 +54,7 @@ import { MatTableModule } from '@angular/material/table';
     VoucherComponent,
     AddEventComponent,
     AddBlogComponent,
+    DashboardComponent,
 
    ],
   imports: [

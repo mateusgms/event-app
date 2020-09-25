@@ -31,7 +31,6 @@ export class UserService {
             );
     }
     saveUser(user: User): Observable<User> {
-        alert(JSON.stringify(user))
         return this.httpClient.post<User>(this.url , JSON.stringify(user), this.httpOptions)
             .pipe(
                 retry(2),
@@ -39,7 +38,7 @@ export class UserService {
             );
     }
     updateUser(user: User ): Observable<User>{
-        return this.httpClient.put<User>(this.url + '/id/' + user.id, JSON.stringify(user), this.httpOptions)
+        return this.httpClient.put<User>(this.url, JSON.stringify(user), this.httpOptions)
         .pipe(
             retry(1),
             catchError(this.handleError)

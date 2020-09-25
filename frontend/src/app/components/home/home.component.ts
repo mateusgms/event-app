@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { slides } from '../../slides';
-import { EventService } from 'src/app/services/event.service';
+import { EventService } from './../../services/event.service';
 import { Event } from './../../models/event';
-import { BlogService } from 'src/app/services/blog.service';
+import { BlogService } from './../../services/blog.service';
 import { Blog } from './../../models/blog';
 
 

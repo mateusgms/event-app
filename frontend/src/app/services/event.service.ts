@@ -38,7 +38,7 @@ export class EventService {
             );
     }
     updateEvent(event: Event ): Observable<Event>{
-        return this.httpClient.put<Event>(this.url + '/id/' + event.id, JSON.stringify(event), this.httpOptions)
+        return this.httpClient.put<Event>(this.url, JSON.stringify(event), this.httpOptions)
         .pipe(
             retry(1),
             catchError(this.handleError)

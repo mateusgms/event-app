@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 import { MustMatch } from '../../_helpers/must-match.validator';
 import { UserService } from './../../services/user.service';
-import { AuthService } from './../../services/auth.service';
+// import { AuthService } from './../../services/auth.service';
 import { User } from './../../models/user';
 import { Router } from '@angular/router';
 
@@ -31,7 +31,7 @@ export class LogInComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private authService: AuthService,
+    // private authService: AuthService,
     private router: Router,
      ) { }
 
@@ -84,20 +84,20 @@ export class LogInComponent implements OnInit{
   }
   loginSubmit(){
 
-    const val = this.loginForm.value;
+    // const val = this.loginForm.value;
 
-    if(this.loginForm.invalid){
-      alert('deu ruim')
-      return;
-    } else{
-      if(val.email && val.password){
-        this.authService.login(val.email, val.password)
-          .subscribe(()=>{
-            alert('User logado');
-            this.router.navigateByUrl('/dashboard');
-          })
-      }
-    }
+    // if(this.loginForm.invalid){
+    //   alert('deu ruim')
+    //   return;
+    // } else{
+    //   if(val.email && val.password){
+    //     this.authService.login(val.email, val.password)
+    //       .subscribe(()=>{
+    //         alert('User logado');
+    //         this.router.navigateByUrl('/dashboard');
+    //       })
+    //   }
+    // }
   }
   onReset(): void {
     this.submitted = false;
