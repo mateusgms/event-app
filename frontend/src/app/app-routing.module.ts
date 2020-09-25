@@ -69,7 +69,15 @@ const routes: Routes = [
     component: AddBlogComponent
   },
   {
+    path: 'addpost/:postId',
+    component: AddBlogComponent
+  },
+  {
     path: 'addevent',
+    component: AddEventComponent
+  },
+  {
+    path: 'addevent/:eventId',
     component: AddEventComponent
   },
 ];

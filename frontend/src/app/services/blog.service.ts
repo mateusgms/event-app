@@ -38,7 +38,7 @@ export class BlogService {
             );
     }
     updateBlog(blog: Blog ): Observable<Blog>{
-        return this.httpClient.put<Blog>(this.url + '/id/' + blog.id, JSON.stringify(blog), this.httpOptions)
+        return this.httpClient.put<Blog>(this.url, JSON.stringify(blog), this.httpOptions)
         .pipe(
             retry(1),
             catchError(this.handleError)
