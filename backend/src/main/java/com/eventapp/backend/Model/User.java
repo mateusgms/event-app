@@ -4,12 +4,13 @@ import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 
 @Data
 @AllArgsConstructor
@@ -19,15 +20,33 @@ import javax.persistence.Table;
 public class User {
 	@Id
 	@GeneratedValue
-    private int id;
-    private String name;
-    private String email;
-    private String phone;
-    private String address;
-    private String uf;
-    private String country;
+	private int id;
+
+	@NonNull
+	private String name;
+
+	@NonNull
+	@Column(unique=true)
+	private String email;
+	
+	@NonNull
+	private String phone;
+
+	@NonNull
+	private String address;
+	
+	@NonNull
+	private String uf;
+	
+	@NonNull
+	private String country;
+	
+	@NonNull
 	private String password;
+
+	@NonNull
 	private Date date;
+
 	private Boolean isAdmin;
     
 	public int getId() {
