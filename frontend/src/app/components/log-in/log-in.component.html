@@ -11,11 +11,11 @@
             <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" class="viewer-body">
                 <mat-form-field appearance="standard">
                     <mat-label>Email</mat-label>
-                    <input matInput type="email" formControlName='email' [formControl]="email" class="form-control"/>
+                    <input matInput type="email" [formControl]="email" class="form-control"/>
                 </mat-form-field>
                 <mat-form-field appearance="standard">
                     <mat-label>Senha</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" formControlName='password' [formControl]="password" class="form-control"/>
+                    <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" class="form-control"/>
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
