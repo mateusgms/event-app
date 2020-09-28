@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Blog } from './../../models/blog';
 import { BlogService } from './../../services/blog.service';
@@ -22,6 +22,7 @@ export class AddBlogComponent implements OnInit {
   postId: number;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private blogService: BlogService,
@@ -34,32 +35,10 @@ export class AddBlogComponent implements OnInit {
       this.postId = +params.get('postId');
     });
 
-    if (this.postId === 0){
-      this.newPostForm = this.formBuilder.group({
-
-        title: ['', Validators.required],
-        summary: ['', Validators.required],
-        text: ['', [Validators.required]],
-        category: ['', [Validators.required]],
-        imageURL: ['', [Validators.required]],
-        date: ['', [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
-
-      });
-    }else{
-      this.getBlogById(this.postId);
-      alert('Dados carregados em 3,2,1...');
-      this.newPostForm = this.formBuilder.group({
-
-        id: [this.postId],
-        author: [this.post.author],
-        title: [this.post.title, Validators.required],
-        summary: [this.post.summary, Validators.required],
-        text: [this.post.text, [Validators.required]],
-        category: [this.post.category, [Validators.required]],
-        imageURL: [this.post.imageURL, [Validators.required]],
-        date: [this.post.date, [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
-
-      });
+    if (this.postId === 0) {
+      this.createPostForm(this.post);
+    } else {
+      this.getPostData();
     }
   }
 
@@ -72,30 +51,59 @@ export class AddBlogComponent implements OnInit {
       alert('Formulário inválido');
       return;
     }
-    else if (this.postId === 0){
-      return this.blogService.saveBlog(this.post = this.newPostForm.value, 39).subscribe((post: Blog) => {
+    else if (this.postId === 0) {
+      this.blogService.saveBlog(this.post = this.newPostForm.value, 39).subscribe((post: Blog) => {
         this.post = post;
-
       });
+      return this.router.navigate(['/listposts']);
     }
-    else{
-      return this.blogService.updateBlog(this.post = this.newPostForm.value).subscribe((post: Blog) => {
+    else {
+      this.blogService.updateBlog(this.post = this.newPostForm.value).subscribe((post: Blog) => {
         this.post = post;
       });
+      return this.router.navigate(['/listposts']);
     }
   }
 
-  getUserById(userId: number): void{
+  getUserById(userId: number): void {
     this.userService.getUserById(userId).subscribe((user: User) => {
       this.user = user;
     });
 
   }
 
-  getBlogById(postId: number): void {
-    this.blogService.getBlogById(postId).subscribe((post: Blog) => {
-      this.post = post;
+  getPostById(postId: number): any {
+    return new Promise(resolve => {
+      this.blogService.getBlogById(postId).subscribe((post: Blog) => {
+        this.post = post;
+        resolve(this.post);
+      });
     });
+  }
+
+  createPostForm(post: Blog): any {
+    this.newPostForm = this.formBuilder.group({
+
+      id: [this.postId],
+      author: [post.author],
+      title: [post.title, Validators.required],
+      summary: [post.summary, Validators.required],
+      text: [post.text, [Validators.required]],
+      category: [post.category, [Validators.required]],
+      imageURL: [post.imageURL, [Validators.required]],
+      date: [post.date, [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
+
+    });
+  }
+
+  async getPostData() {
+    try {
+      await this.getPostById(this.postId);
+      await this.createPostForm(this.post);
+    } catch {
+      alert('Post não encontrado');
+      this.router.navigate(['/listposts']);
+    }
   }
 
 }

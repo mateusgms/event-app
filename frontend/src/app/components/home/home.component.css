@@ -3,7 +3,9 @@
 /* Cards CSS */
 .card {
   max-height: 350px;
+  min-height: 250px;
   max-width: 350px;
+  min-width: 250px;
   display: flex;
   margin-right: 25px;
 }
