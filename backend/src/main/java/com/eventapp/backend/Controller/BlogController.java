@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.eventapp.backend.Model.Blog;
 import com.eventapp.backend.Model.User;
+import com.eventapp.backend.Repository.BlogRepository;
 import com.eventapp.backend.Repository.UserRepository;
 import com.eventapp.backend.Services.BlogService;
 
@@ -29,6 +30,9 @@ public class BlogController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BlogRepository blogRepository;
+
     // CREATE
     @PostMapping("/blogs")
     public Blog addBlog(@RequestBody Blog blog, @RequestParam("userId") int userId) {
@@ -49,15 +53,20 @@ public class BlogController {
         return blogService.getBlogs();
     }
     @GetMapping("/blogs/id/{id}")
-    public Blog findBlogById(@PathVariable int id) {
+    public Blog getBlogById(@PathVariable int id) {
         return blogService.getBlogById(id);
     }
     @GetMapping("/blogs/title/{title}")
-    public Blog findBlogByTitle(@PathVariable String title) {
+    public Blog getBlogByTitle(@PathVariable String title) {
         return blogService.getBlogByTitle(title);
     }
     //List Blog by category
-
+    @GetMapping("/blogs/author/{authorId}")
+    public List<Blog> getBlogsByAuthor(@PathVariable Integer authorId) {
+        User user = userRepository.findById(authorId).get();
+        List<Blog> blogs = blogRepository.findBlogsByAuthor(user);
+        return blogs;
+    }
     // PUT
     @PutMapping("/blogs")
     public Blog updateBlog(@RequestBody Blog blog) {
