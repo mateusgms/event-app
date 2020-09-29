@@ -1,12 +1,18 @@
 <div class="viewer-wrapper">
-    <div class="viewer-title">
-        <div class="viewer-title-text">
-            {{ event.title }}
-        </div>
+  <div class="viewer-title">
+    <div class="viewer-title-text">
+      {{ event.title }}
     </div>
-    <div class="viewer-body">
-        <img src="{{ event.imageURL }}">
-        <p>{{ event.description }}</p>
-        <button mat-raised-button [routerLink]="['/voucher']" color="primary">Inscrever-se</button>
-    </div>
+  </div>
+  <div class="viewer-body">
+    <img src="{{ event.imageURL }}" />
+    <p>{{ event.description }}</p>
+    <button
+      mat-raised-button
+      [routerLink]="['/voucher', event.id]"
+      color="primary"
+    >
+      Inscrever-se
+    </button>
+  </div>
 </div>

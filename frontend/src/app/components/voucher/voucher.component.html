@@ -1,3 +1,14 @@
-<p>
-  voucher works!
-</p>
+<div class="viewer-wrapper">
+  <div class="viewer-title">
+    <div class="viewer-title-text">Comprar Voucher</div>
+  </div>
+  <form (ngSubmit)="onSubmit()" class="viewer-body">
+    <mat-form-field appearance="standard">
+      <mat-label>Quantidade</mat-label>
+      <input matInput type="number" [formControl]="quantity" required />
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary">
+      Ir para pagamento
+    </button>
+  </form>
+</div>
