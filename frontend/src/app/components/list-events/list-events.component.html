@@ -1,19 +1,26 @@
-<a [routerLink]="['/addevent']" style="text-decoration: none; margin-left: 30px; color: black;"> Criar novo post ></a>
+<a
+  [routerLink]="['/addevent']"
+  style="text-decoration: none; margin-left: 30px; color: black"
+>
+  Criar novo post ></a
+>
 <table mat-table [dataSource]="events" class="mat-elevation-z8">
-  <caption>Lista de Eventos</caption>
+  <caption>
+    Lista de Eventos
+  </caption>
 
   <!-- imageURL Column -->
   <ng-container matColumnDef="imageURL">
-    <th mat-header-cell *matHeaderCellDef> Imagem </th>
-    <td mat-cell *matCellDef="let event"> <img src="{{event.imageURL}}" /> </td>
+    <th mat-header-cell *matHeaderCellDef>Imagem</th>
+    <td mat-cell *matCellDef="let event"><img src="{{ event.imageURL }}" /></td>
   </ng-container>
 
   <!-- title Column -->
   <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef> Título </th>
-    <td mat-cell *matCellDef="let event"> {{event.title}} </td>
+    <th mat-header-cell *matHeaderCellDef>Título</th>
+    <td mat-cell *matCellDef="let event">{{ event.title }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>

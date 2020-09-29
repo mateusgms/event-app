@@ -10,32 +10,34 @@ import { UserService } from './../../services/user.service';
 @Component({
   selector: 'app-add-blog',
   templateUrl: './add-blog.component.html',
-  styleUrls: ['./add-blog.component.css']
+  styleUrls: ['./add-blog.component.css'],
 })
 export class AddBlogComponent implements OnInit {
-
   post = {} as Blog;
   posts: Blog[];
   newPostForm: FormGroup;
   submitted = false;
   user: User;
   postId: number;
+  userId: number;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private blogService: BlogService,
-    private userService: UserService,
-
-  ) { }
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.postId = +params.get('postId');
+    this.route.paramMap.subscribe((params) => {
+      if (params.get('postId')) {
+        this.postId = +params.get('postId');
+      } else {
+        this.postId = null;
+      }
     });
-
-    if (this.postId === 0) {
+    if (this.postId == null || isNaN(this.postId)) {
       this.createPostForm(this.post);
     } else {
       this.getPostData();
@@ -43,24 +45,28 @@ export class AddBlogComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f(): any { return this.newPostForm.controls; }
+  get f(): any {
+    return this.newPostForm.controls;
+  }
 
   onSubmit(): any {
     this.submitted = true;
     if (this.newPostForm.invalid) {
       alert('Formulário inválido');
       return;
-    }
-    else if (this.postId === 0) {
-      this.blogService.saveBlog(this.post = this.newPostForm.value, 39).subscribe((post: Blog) => {
-        this.post = post;
-      });
+    } else if (this.postId == null) {
+      this.blogService
+        .saveBlog((this.post = this.newPostForm.value), this.userId)
+        .subscribe((post: Blog) => {
+          this.post = post;
+        });
       return this.router.navigate(['/listposts']);
-    }
-    else {
-      this.blogService.updateBlog(this.post = this.newPostForm.value).subscribe((post: Blog) => {
-        this.post = post;
-      });
+    } else {
+      this.blogService
+        .updateBlog((this.post = this.newPostForm.value))
+        .subscribe((post: Blog) => {
+          this.post = post;
+        });
       return this.router.navigate(['/listposts']);
     }
   }
@@ -69,11 +75,10 @@ export class AddBlogComponent implements OnInit {
     this.userService.getUserById(userId).subscribe((user: User) => {
       this.user = user;
     });
-
   }
 
   getPostById(postId: number): any {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.blogService.getBlogById(postId).subscribe((post: Blog) => {
         this.post = post;
         resolve(this.post);
@@ -83,17 +88,27 @@ export class AddBlogComponent implements OnInit {
 
   createPostForm(post: Blog): any {
     this.newPostForm = this.formBuilder.group({
-
       id: [this.postId],
-      author: [post.author],
+      author: [post.author], // Tirar o author depois de ter tirado no back
       title: [post.title, Validators.required],
       summary: [post.summary, Validators.required],
       text: [post.text, [Validators.required]],
       category: [post.category, [Validators.required]],
       imageURL: [post.imageURL, [Validators.required]],
-      date: [post.date, [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
-
+      date: [
+        post.date,
+        [
+          Validators.required,
+          Validators.pattern(
+            /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/
+          ),
+        ],
+      ],
     });
+  }
+
+  getAuthor() {
+    this.userId = 39; // TODO - pegar userId da seção
   }
 
   async getPostData() {
@@ -101,9 +116,8 @@ export class AddBlogComponent implements OnInit {
       await this.getPostById(this.postId);
       await this.createPostForm(this.post);
     } catch {
-      alert('Post não encontrado');
+      alert('Post não encontrado'); // 404
       this.router.navigate(['/listposts']);
     }
   }
-
 }
