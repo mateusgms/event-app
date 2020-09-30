@@ -44,7 +44,6 @@ public class VoucherService {
 
         Voucher existingVoucher = repository.findById(voucher.getId()).orElse(null);
 
-        existingVoucher.setAvailable(voucher.getAvailable());
         existingVoucher.setQuantity(voucher.getQuantity());
 
 

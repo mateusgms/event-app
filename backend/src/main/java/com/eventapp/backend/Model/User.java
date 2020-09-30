@@ -46,7 +46,7 @@ public class User {
 
 	@NonNull
 	private Date date;
-
+	
 	private Boolean isAdmin;
     
 	public int getId() {

@@ -30,6 +30,7 @@ public class Event {
     private String imageURL;
     private float value;
     private Date date;
+    //private int quantity;
 
     public int getId() {
         return id;
