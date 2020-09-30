@@ -32,7 +32,7 @@ public class Voucher {
     private User user;
 
     private int quantity;
-
+  
     private boolean available;
 
     public int getId() {
