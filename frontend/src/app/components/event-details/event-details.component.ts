@@ -29,22 +29,32 @@ export class EventDetailsComponent implements OnInit {
     });
     if (this.eventId == null || isNaN(this.eventId)) {
       this.error404();
-    } else {
-      this.getEventById(this.eventId);
-      // if (this.event == null) {
-      //   this.error404();
-      // }
     }
+    this.getEventData(this.eventId);
   }
-  // TODO - async
-  getEventById(eventId: number): void {
-    this.eventService.getEventById(eventId).subscribe((event: Event) => {
-      this.event = event;
+
+  getEventById(eventId: number): any {
+    return new Promise((resolve) => {
+      this.eventService.getEventById(eventId).subscribe((event: Event) => {
+        this.event = event;
+        resolve(this.event);
+      });
     });
   }
 
   error404(): void {
     alert('Evento não encontrado'); // 404
     this.router.navigate(['/event']);
+  }
+
+  async getEventData(eventId: number) {
+    try {
+      await this.getEventById(eventId);
+      if (this.event == null) {
+        this.error404();
+      }
+    } catch {
+      this.error404();
+    }
   }
 }

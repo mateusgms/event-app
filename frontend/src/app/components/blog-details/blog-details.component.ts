@@ -30,21 +30,32 @@ export class BlogDetailsComponent implements OnInit {
     if (this.postId == null || isNaN(this.postId)) {
       this.error404();
     } else {
-      this.getBlogById(this.postId);
-      // if (this.event == null) {
-      //   this.error404();
-      // }
+      this.getPostData(this.postId);
     }
   }
-  // TODO - async
-  getBlogById(postId: number): void {
-    this.blogService.getBlogById(postId).subscribe((post: Blog) => {
-      this.post = post;
+
+  getBlogById(postId: number): any {
+    return new Promise((resolve) => {
+      this.blogService.getBlogById(postId).subscribe((post: Blog) => {
+        this.post = post;
+        resolve(this.post);
+      });
     });
   }
 
   error404(): void {
     alert('Post não encontrado'); // 404
     this.router.navigate(['/post']);
+  }
+
+  async getPostData(postId: number) {
+    try {
+      await this.getBlogById(postId);
+      if (this.post == null) {
+        this.error404();
+      }
+    } catch {
+      this.error404();
+    }
   }
 }
