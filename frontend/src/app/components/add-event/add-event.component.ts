@@ -8,10 +8,9 @@ import { EventService } from './../../services/event.service';
 @Component({
   selector: 'app-add-event',
   templateUrl: './add-event.component.html',
-  styleUrls: ['./add-event.component.css']
+  styleUrls: ['./add-event.component.css'],
 })
 export class AddEventComponent implements OnInit {
-
   event = {} as Event;
   events: Event[];
   newEventForm: FormGroup;
@@ -22,15 +21,19 @@ export class AddEventComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private eventService: EventService,
-  ) { }
+    private eventService: EventService
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.eventId = +params.get('eventId');
+    this.route.paramMap.subscribe((params) => {
+      if (params.get('eventId')) {
+        this.eventId = +params.get('eventId');
+      } else {
+        this.eventId = null;
+      }
     });
 
-    if (this.eventId === 0) {
+    if (this.eventId == null || isNaN(this.eventId)) {
       this.createEventForm(this.event);
     } else {
       this.getEventData();
@@ -38,30 +41,34 @@ export class AddEventComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.newEventForm.controls; }
+  get f() {
+    return this.newEventForm.controls;
+  }
 
   onSubmit(): any {
     this.submitted = true;
     if (this.newEventForm.invalid) {
       alert('Formulário inválido');
       return;
-    }
-    else if (this.eventId === 0) {
-      this.eventService.saveEvent(this.event = this.newEventForm.value).subscribe((event: Event) => {
-        this.event = event;
-      });
+    } else if (this.eventId == null) {
+      this.eventService
+        .saveEvent((this.event = this.newEventForm.value))
+        .subscribe((event: Event) => {
+          this.event = event;
+        });
       return this.router.navigate(['/listevents']);
-    }
-    else {
-      this.eventService.updateEvent(this.event = this.newEventForm.value).subscribe((event: Event) => {
-        this.event = event;
-      });
+    } else {
+      this.eventService
+        .updateEvent((this.event = this.newEventForm.value))
+        .subscribe((event: Event) => {
+          this.event = event;
+        });
       return this.router.navigate(['/listevents']);
     }
   }
 
   getEventById(eventId: number): any {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.eventService.getEventById(eventId).subscribe((event: Event) => {
         this.event = event;
         resolve(this.event);
@@ -71,7 +78,6 @@ export class AddEventComponent implements OnInit {
 
   createEventForm(event: Event): any {
     this.newEventForm = this.formBuilder.group({
-
       id: [this.eventId],
       title: [event.title, Validators.required],
       description: [event.description, Validators.required],
@@ -80,8 +86,15 @@ export class AddEventComponent implements OnInit {
       country: [event.country, [Validators.required]],
       imageURL: [event.imageURL, [Validators.required]],
       value: [event.value, [Validators.required]],
-      date: [event.date, [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
-
+      date: [
+        event.date,
+        [
+          Validators.required,
+          Validators.pattern(
+            /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/
+          ),
+        ],
+      ],
     });
   }
 
@@ -94,5 +107,4 @@ export class AddEventComponent implements OnInit {
       this.router.navigate(['/listevents']);
     }
   }
-
 }

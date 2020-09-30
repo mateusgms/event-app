@@ -18,72 +18,72 @@ import { AddEventComponent } from './components/add-event/add-event.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'post',
-    component: BlogComponent
+    component: BlogComponent,
   },
   {
     path: 'post/:postId',
-    component: BlogDetailsComponent
+    component: BlogDetailsComponent,
   },
   {
     path: 'event',
-    component: EventComponent
+    component: EventComponent,
   },
   {
     path: 'event/:eventId',
-    component: EventDetailsComponent
+    component: EventDetailsComponent,
   },
   {
     path: 'login',
-    component: LogInComponent
+    component: LogInComponent,
   },
   {
     path: 'suporte',
-    component: SupportComponent
+    component: SupportComponent,
   },
   {
-    path: 'voucher',
-    component: VoucherComponent
+    path: 'voucher/:eventId',
+    component: VoucherComponent,
   },
   {
     path: 'listusers',
-    component: ListUsersComponent
+    component: ListUsersComponent,
   },
   {
     path: 'listposts',
-    component: ListBlogsComponent
+    component: ListBlogsComponent,
   },
   {
     path: 'listevents',
-    component: ListEventsComponent
+    component: ListEventsComponent,
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
   },
   {
     path: 'addpost',
-    component: AddBlogComponent
+    component: AddBlogComponent,
   },
   {
     path: 'addpost/:postId',
-    component: AddBlogComponent
+    component: AddBlogComponent,
   },
   {
     path: 'addevent',
-    component: AddEventComponent
+    component: AddEventComponent,
   },
   {
     path: 'addevent/:eventId',
-    component: AddEventComponent
+    component: AddEventComponent,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

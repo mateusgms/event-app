@@ -13,7 +13,7 @@ a:hover {
   color: rgb(19, 47, 139);
 }
 
- img{
+img{
   height: 194px;
   max-width: 350px;
 }
@@ -25,7 +25,6 @@ img{
 mat-list{
   margin: 20px;
   max-width: 500px;
-  width: 33%;
 }
 
 mat-list-item{
