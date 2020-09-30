@@ -45,7 +45,7 @@ export class VoucherService {
   }
   deleteVoucher(voucher: Voucher) {
     return this.httpClient
-      .delete<Voucher>(this.url + '/id/' + voucher.id, this.httpOptions)
+      .delete<Voucher>(this.url + '/' + voucher.id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
 
