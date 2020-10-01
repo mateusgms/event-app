@@ -2,18 +2,23 @@ package com.eventapp.backend.Controller.exception;
 
 public class VoucherNotFoundException extends Exception {
 
-    private int quantity;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-    public static VoucherNotFoundException createWith(int quantity) {
-        return new VoucherNotFoundException(quantity);
+    private int voucherId;
+
+    public static VoucherNotFoundException createWith(int voucherId) {
+        return new VoucherNotFoundException(voucherId);
     }
 
-    private VoucherNotFoundException(int quantity) {
-        this.quantity = quantity;
+    public VoucherNotFoundException(int voucherId) {
+        this.voucherId = voucherId;
     }
 
     @Override
     public String getMessage() {
-        return "Você tem "+ quantity + "de vouchers";
+        return "O "+ voucherId + "não existe.";
     }
 }

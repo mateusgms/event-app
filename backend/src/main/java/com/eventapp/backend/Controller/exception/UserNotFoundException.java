@@ -2,17 +2,21 @@ package com.eventapp.backend.Controller.exception;
 
 public class UserNotFoundException extends Exception{
 
-    private String email;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    private int userId;
 
-    private UserNotFoundException(String email) {
-        this.email = email;
+    public UserNotFoundException(int userId) {
+        this.userId = userId;
     }
 
-    public static UserNotFoundException createWith(String email) {
-        return new UserNotFoundException(email);
+    public static UserNotFoundException createWith(int userId) {
+        return new UserNotFoundException(userId);
     }
     @Override
     public String getMessage() {
-        return "User " + email + "não foi encontrado";
+        return "User " + userId + " não foi encontrado";
     }
 }
