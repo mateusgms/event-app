@@ -1,5 +1,6 @@
 package com.eventapp.backend.Controller.exception;
 
+import com.eventapp.backend.Model.Event;
 
 public class EventNotFoundException extends Exception{
 
@@ -12,11 +13,14 @@ public class EventNotFoundException extends Exception{
         this.event = event;
     }
 
-    public static EventNotFoundException createWith(int event) {
+    public EventNotFoundException(Event event2) {
+	}
+
+	public static EventNotFoundException createWith(int event) {
         return new EventNotFoundException(event);
     }
     @Override
     public String getMessage() {
-        return "User " + event + "não foi encontrado";
+        return "Event " + event + "não foi encontrado";
     }
 }

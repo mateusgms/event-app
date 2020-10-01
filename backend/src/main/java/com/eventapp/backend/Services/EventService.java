@@ -2,6 +2,7 @@ package com.eventapp.backend.Services;
 
 import java.util.List;
 
+import com.eventapp.backend.Controller.exception.EventNotFoundException;
 import com.eventapp.backend.Model.Event;
 import com.eventapp.backend.Repository.EventRepository;
 
@@ -20,19 +21,14 @@ public class EventService {
         return repository.save(event);
     }
     
-    public List<Event> saveEvents(List<Event> events){
-
-        return repository.saveAll(events);
-    }
 
     public List<Event> getEvents(){
 
         return repository.findAll();
     }
 
-    public Event getEventById(int id){
-
-        return repository.findById(id).orElse(null);
+    public Event getEventById(int id) throws EventNotFoundException{
+        return repository.findById(id).orElseThrow(() -> new EventNotFoundException(id));
     }
 
     public Event getEventByTitle(String name){
@@ -47,9 +43,9 @@ public class EventService {
 
     }
 
-    public Event updateEvent(Event event){
+    public Event updateEvent(Event event) throws EventNotFoundException {
 
-        Event existingEvent = repository.findById(event.getId()).orElse(null);
+        Event existingEvent = repository.findById(event.getId()).orElseThrow(() -> new EventNotFoundException(event));
         existingEvent.setAddress(event.getAddress());
         existingEvent.setCountry(event.getCountry());
         existingEvent.setDate(event.getDate());
