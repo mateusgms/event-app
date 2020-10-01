@@ -2,12 +2,12 @@ package com.eventapp.backend.Services;
 
 import java.util.List;
 
-import com.eventapp.backend.Controller.BlogController;
+import com.eventapp.backend.Controller.exception.BlogNotFoundException;
+import com.eventapp.backend.Controller.exception.UserNotFoundException;
 import com.eventapp.backend.Model.Blog;
 import com.eventapp.backend.Model.User;
 import com.eventapp.backend.Repository.BlogRepository;
 import com.eventapp.backend.Repository.UserRepository;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,47 +18,43 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private BlogController blogController;
-
-    @Autowired
     private BlogRepository blogRepository;
 
     @Autowired
     private BlogService blogService;
 
-    public User saveUser(User user){
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
-    
-    public List<User> saveUsers(List<User> users){
+
+    public List<User> saveUsers(List<User> users) {
         return userRepository.saveAll(users);
     }
-    public List<User> getUsers(){
+
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
-    public User getUserById(int id){
-        return userRepository.findById(id).orElse(null);
+
+    public User getUserById(int id) throws UserNotFoundException {
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
-    public User getUserByEmail(String email){
+
+    public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-    public String deleteUser(Integer id){
 
-        if(blogController.getBlogsByAuthor(id).isEmpty()){
+    public String deleteUser(Integer id) throws BlogNotFoundException {
 
+        User user = userRepository.findById(id).get();
+
+        if (blogService.getBlogsByAuthor(user).isEmpty()) {
             System.out.println("Vim aqui");
-
             userRepository.deleteById(id);
-
             return "User removed!! " + id;
-
-        } else{
-            
-            User user = userRepository.findById(id).get();
-
+        } else {
             List<Blog> blogs = blogRepository.findBlogsByAuthor(user);
             System.out.println("Blogs:" + blogs.size());
-            
+
             for (Blog blog : blogs) {
 
                 System.out.println("blog author:" + blog.getAuthor() + "Blog id:" + blog.getId());
@@ -72,15 +68,16 @@ public class UserService {
                 blogService.updateBlog(blog);
 
                 System.out.println("blog author:" + blog.getAuthor());
-                
+
             }
             userRepository.deleteById(id);
 
-            return "User " + id +" removed and posts are changed for another Author(root)";
+            return "User " + id + " removed and posts are changed for another Author(root)";
         }
-        
+
     }
-    public User updateUser(User user){
+
+    public User updateUser(User user) {
         User existingUser = userRepository.findById(user.getId()).orElse(null);
         existingUser.setAddress(user.getAddress());
         existingUser.setCountry(user.getCountry());

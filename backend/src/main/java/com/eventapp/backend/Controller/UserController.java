@@ -2,6 +2,7 @@ package com.eventapp.backend.Controller;
 
 import java.util.List;
 
+import com.eventapp.backend.Controller.exception.BlogNotFoundException;
 import com.eventapp.backend.Controller.exception.UserNotFoundException;
 import com.eventapp.backend.Model.User;
 import com.eventapp.backend.Services.UserService;
@@ -28,7 +29,7 @@ public class UserController {
     // CREATE
     @PostMapping("/users")
     public ResponseEntity<User> addUser(@RequestBody User user) throws UserNotFoundException {
- 
+
         return new ResponseEntity<>(service.saveUser(user), HttpStatus.OK);
     }
 
@@ -37,14 +38,17 @@ public class UserController {
     public ResponseEntity<List<User>> findAllUsers() {
         return new ResponseEntity<>(service.getUsers(), HttpStatus.OK);
     }
+
     @GetMapping("/users/id/{id}")
-    public ResponseEntity<User> findUserById(@PathVariable int id) {
+    public ResponseEntity<User> findUserById(@PathVariable int id) throws UserNotFoundException {
         return new ResponseEntity<>(service.getUserById(id), HttpStatus.OK);
     }
+
     @GetMapping("/users/email/{email}")
     public ResponseEntity<User> findUserByEmail(@PathVariable String email) {
         return new ResponseEntity<>(service.getUserByEmail(email), HttpStatus.OK);
     }
+
     // PUT
     @PutMapping("/users")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
@@ -53,7 +57,7 @@ public class UserController {
 
     // DELETE
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable int id) {
+    public ResponseEntity<String> deleteUser(@PathVariable int id) throws BlogNotFoundException {
         return new ResponseEntity<>(service.deleteUser(id), HttpStatus.OK);
     }
 }

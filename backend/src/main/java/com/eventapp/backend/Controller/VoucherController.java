@@ -54,17 +54,17 @@ public class VoucherController {
 
         Date now = new Date();
 
-        if (user.equals(null) || event.getDate().before(now)) {
+        if (event.getDate().before(now)) {
             System.out.println("Usuário ou Evento invalido! User: " + user.getId() + "Evento fora de data"
                     + event.getDate().before(now));
-
+            voucher.setAvailable(false);
             return new ResponseEntity<>(voucher, HttpStatus.BAD_REQUEST);
 
         } else {
 
             voucher.setUser(user);
-
             voucher.setEvent(event);
+            voucher.setAvailable(true);
 
             voucherService.saveVoucher(voucher);
             System.out.println("Voucher " + voucher.getId() + " foi criado com sucesso!");
@@ -82,7 +82,8 @@ public class VoucherController {
     @GetMapping(value = "/vouchers/id/{voucherId}")
     public ResponseEntity<Voucher> getVoucherById(@PathVariable int voucherId) throws VoucherNotFoundException {
 
-        Voucher voucher = voucherRepository.findById(voucherId).orElseThrow(()-> new VoucherNotFoundException(voucherId));
+        Voucher voucher = voucherRepository.findById(voucherId)
+                .orElseThrow(() -> new VoucherNotFoundException(voucherId));
         Event event = voucher.getEvent();
         Date now = new Date();
 
@@ -97,8 +98,13 @@ public class VoucherController {
     }
 
     @PutMapping("/vouchers")
-    public ResponseEntity<Voucher> updateVoucher(@RequestBody Voucher voucher) {
-
+    public ResponseEntity<Voucher> updateVoucher(@RequestBody Voucher voucher) throws VoucherNotFoundException {
+        Event event = voucher.getEvent();
+        Date now = new Date();
+        if (event.getDate().before(now)) {
+            voucher.setAvailable(false);
+            return new ResponseEntity<>(voucher, HttpStatus.OK);
+        }
         return new ResponseEntity<>(voucherService.updateVoucher(voucher), HttpStatus.OK);
     }
 

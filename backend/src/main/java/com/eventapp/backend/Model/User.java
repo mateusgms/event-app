@@ -133,5 +133,8 @@ public class User {
 			this.isAdmin = false;
 		}
 	}
+	public User orElseThrow(Object object) {
+		return null;
+	}
 	
 }
