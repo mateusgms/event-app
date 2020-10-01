@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
 
         HttpHeaders headers = new HttpHeaders();
 
-        LOGGER.error("Tratando erro ", ex.getClass().getSimpleName() + "devido a " + ex.getMessage());
+        LOGGER.error("Erro " + ex.getClass().getSimpleName() + " devido a " + ex.getMessage());
 
         if (ex instanceof UserNotFoundException) {
             HttpStatus status = HttpStatus.NOT_FOUND;

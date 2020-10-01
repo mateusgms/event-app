@@ -5,11 +5,13 @@ import java.util.List;
 
 import com.eventapp.backend.Controller.exception.EventNotFoundException;
 import com.eventapp.backend.Controller.exception.UserNotFoundException;
+import com.eventapp.backend.Controller.exception.VoucherNotFoundException;
 import com.eventapp.backend.Model.Event;
 import com.eventapp.backend.Model.User;
 import com.eventapp.backend.Model.Voucher;
 import com.eventapp.backend.Repository.EventRepository;
 import com.eventapp.backend.Repository.UserRepository;
+import com.eventapp.backend.Repository.VoucherRepository;
 import com.eventapp.backend.Services.VoucherService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -40,24 +41,16 @@ public class VoucherController {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private VoucherRepository voucherRepository;
+
     // CREATE
     @PostMapping(value = "/vouchers")
     public ResponseEntity<Voucher> addVoucher(@RequestBody Voucher voucher, @RequestParam("userId") int userId,
             @RequestParam("eventId") int eventId) throws UserNotFoundException, EventNotFoundException {
-        User user;
-        Event event;
 
-        if (userRepository.findById(userId).get().equals(null)) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        } else {
-            user = userRepository.findById(userId).get();
-            System.out.println("User encontrado " + user.getId());
-        }
-        if (eventRepository.findById(eventId).get().equals(null)) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        } else {
-            event = eventRepository.findById(eventId).get();
-        }
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException(eventId));
 
         Date now = new Date();
 
@@ -86,14 +79,14 @@ public class VoucherController {
         return new ResponseEntity<>(voucherService.getVouchers(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/vouchers/id/{id}")
-    public ResponseEntity<Voucher> getVoucherById(@RequestParam int id) {
+    @GetMapping(value = "/vouchers/id/{voucherId}")
+    public ResponseEntity<Voucher> getVoucherById(@PathVariable int voucherId) throws VoucherNotFoundException {
 
-        Voucher voucher = voucherService.getVoucherById(id);
+        Voucher voucher = voucherRepository.findById(voucherId).orElseThrow(()-> new VoucherNotFoundException(voucherId));
         Event event = voucher.getEvent();
         Date now = new Date();
 
-        if(event.getDate().before(now)){
+        if (event.getDate().before(now)) {
             voucher.setAvailable(false);
             return new ResponseEntity<>(voucher, HttpStatus.OK);
         } else {
@@ -101,7 +94,6 @@ public class VoucherController {
             return new ResponseEntity<>(voucher, HttpStatus.OK);
         }
 
-        
     }
 
     @PutMapping("/vouchers")

@@ -2,10 +2,13 @@ package com.eventapp.backend.Controller;
 
 import java.util.List;
 
+import com.eventapp.backend.Controller.exception.UserNotFoundException;
 import com.eventapp.backend.Model.User;
 import com.eventapp.backend.Services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,33 +27,33 @@ public class UserController {
 
     // CREATE
     @PostMapping("/users")
-    public User addUser(@RequestBody User user) {
+    public ResponseEntity<User> addUser(@RequestBody User user) throws UserNotFoundException {
  
-        return service.saveUser(user);
+        return new ResponseEntity<>(service.saveUser(user), HttpStatus.OK);
     }
 
     // GET
     @GetMapping("/users")
-    public List<User> findAllUsers() {
-        return service.getUsers();
+    public ResponseEntity<List<User>> findAllUsers() {
+        return new ResponseEntity<>(service.getUsers(), HttpStatus.OK);
     }
     @GetMapping("/users/id/{id}")
-    public User findUserById(@PathVariable int id) {
-        return service.getUserById(id);
+    public ResponseEntity<User> findUserById(@PathVariable int id) {
+        return new ResponseEntity<>(service.getUserById(id), HttpStatus.OK);
     }
     @GetMapping("/users/email/{email}")
-    public User findUserByEmail(@PathVariable String email) {
-        return service.getUserByEmail(email);
+    public ResponseEntity<User> findUserByEmail(@PathVariable String email) {
+        return new ResponseEntity<>(service.getUserByEmail(email), HttpStatus.OK);
     }
     // PUT
     @PutMapping("/users")
-    public User updateUser(@RequestBody User user) {
-        return service.updateUser(user);
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        return new ResponseEntity<>(service.updateUser(user), HttpStatus.OK);
     }
 
     // DELETE
     @DeleteMapping("/users/{id}")
-    public String deleteUser(@PathVariable int id) {
-        return service.deleteUser(id);
+    public ResponseEntity<String> deleteUser(@PathVariable int id) {
+        return new ResponseEntity<>(service.deleteUser(id), HttpStatus.OK);
     }
 }

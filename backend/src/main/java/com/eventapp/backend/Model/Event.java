@@ -113,6 +113,10 @@ public class Event {
         this.value = value;
         this.date = date;
     }
+
+	public Event orElseThrow(Object object) {
+		return null;
+	}
     
 
 
