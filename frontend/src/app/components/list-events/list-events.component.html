@@ -7,8 +7,8 @@
 <table mat-table [dataSource]="events" class="mat-elevation-z8">
   <caption>
     Lista de Eventos
+    <app-loading *ngIf="showSpinner"></app-loading>
   </caption>
-
   <!-- imageURL Column -->
   <ng-container matColumnDef="imageURL">
     <th mat-header-cell *matHeaderCellDef>Imagem</th>

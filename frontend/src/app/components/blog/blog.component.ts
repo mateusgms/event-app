@@ -6,13 +6,14 @@ import { BlogService } from './../../services/blog.service';
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.css']
+  styleUrls: ['./blog.component.css'],
 })
 export class BlogComponent implements OnInit {
   post = {} as Blog;
   posts: Blog[];
+  showSpinner = true;
 
-  constructor(private blogService: BlogService) { }
+  constructor(private blogService: BlogService) {}
 
   ngOnInit(): void {
     this.getBlogs();
@@ -20,7 +21,7 @@ export class BlogComponent implements OnInit {
   getBlogs(): void {
     this.blogService.getBlogs().subscribe((blogs: Blog[]) => {
       this.posts = blogs;
+      this.showSpinner = false;
     });
   }
-
 }

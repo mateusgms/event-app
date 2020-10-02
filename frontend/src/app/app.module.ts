@@ -16,6 +16,7 @@ import { FootBarComponent } from './components/foot-bar/foot-bar.component';
 import { VoucherComponent } from './components/voucher/voucher.component';
 import { SupportComponent } from './components/support/support.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 // Modules
 import { NgModule } from '@angular/core';
@@ -35,6 +36,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -55,8 +57,8 @@ import { MatTableModule } from '@angular/material/table';
     AddEventComponent,
     AddBlogComponent,
     DashboardComponent,
-
-   ],
+    LoadingComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -75,8 +77,9 @@ import { MatTableModule } from '@angular/material/table';
     MatGridListModule,
     HttpClientModule,
     MatTableModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,43 +1,79 @@
 <div class="viewer-wrapper">
-    <div class="viewer-title">
-        <div class="viewer-title-text">
-            Criar Evento
-        </div>
-    </div>
-    <form [formGroup]="newEventForm" (ngSubmit)="onSubmit()" class="viewer-body">
-        <mat-form-field appearance="standard">
-            <mat-label>Título do Evento</mat-label>
-            <input matInput type="text" formControlName="title" class="form-control" />
-        </mat-form-field>
-        <mat-form-field appearance="standard">
-            <mat-label>Descrição do Evento</mat-label>
-            <input matInput type="text" formControlName="description" class="form-control" />
-        </mat-form-field>
-        <mat-form-field appearance="standard">
-            <mat-label>Endereço do Local do Evento</mat-label>
-            <input matInput type="text" formControlName="address" class="form-control" />
-        </mat-form-field>
-        <mat-form-field appearance="standard">
-            <mat-label>UF</mat-label>
-            <input matInput type="text" formControlName="uf" class="form-control" />
-        </mat-form-field>
-        <mat-form-field appearance="standard">
-            <mat-label>País</mat-label>
-            <input matInput type="text" formControlName="country" class="form-control" />
-        </mat-form-field>
-        <mat-form-field appearance="standard">
-            <mat-label>URL da imagem do Evento</mat-label>
-            <input matInput type="url" formControlName="imageURL" class="form-control" />
-        </mat-form-field>
-        <mat-form-field appearance="standard">
-            <mat-label>Preço da Inscrição</mat-label>
-            <input matInput type="number" formControlName="value" class="form-control" />
-        </mat-form-field>
-        <mat-form-field appearance="standard">
-            <mat-label>Data</mat-label>
-            <input matInput type="date" formControlName="date" class="form-control" />
-        </mat-form-field>
-        <button mat-raised-button type="submit" color="primary">Continuar</button>
-        <button mat-raised-button type="reset" [routerLink]="['/listevents']" style="margin-left: 20px;">Cancelar</button>
-    </form>
+  <div class="viewer-title">
+    <div class="viewer-title-text">Criar Evento</div>
+  </div>
+  <form [formGroup]="newEventForm" (ngSubmit)="onSubmit()" class="viewer-body">
+    <app-loading *ngIf="showSpinner"></app-loading>
+    <mat-form-field appearance="standard">
+      <mat-label>Título do Evento</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="title"
+        class="form-control"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Descrição do Evento</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="description"
+        class="form-control"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Endereço do Local do Evento</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="address"
+        class="form-control"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>UF</mat-label>
+      <input matInput type="text" formControlName="uf" class="form-control" />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>País</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="country"
+        class="form-control"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>URL da imagem do Evento</mat-label>
+      <input
+        matInput
+        type="url"
+        formControlName="imageURL"
+        class="form-control"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Preço da Inscrição</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="value"
+        class="form-control"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Data</mat-label>
+      <input matInput type="date" formControlName="date" class="form-control" />
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary">Continuar</button>
+    <button
+      mat-raised-button
+      type="reset"
+      [routerLink]="['/listevents']"
+      style="margin-left: 20px"
+    >
+      Cancelar
+    </button>
+  </form>
 </div>

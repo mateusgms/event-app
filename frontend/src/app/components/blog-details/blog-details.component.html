@@ -1,11 +1,12 @@
 <div class="viewer-wrapper">
-    <div class="viewer-title">
-        <div class="viewer-title-text">
-            {{ post.title }}
-        </div>
+  <app-loading *ngIf="showSpinner"></app-loading>
+  <div class="viewer-title">
+    <div class="viewer-title-text">
+      {{ post.title }}
     </div>
-    <div class="viewer-body">
-        <img src="{{ post.imageURL }}">
-        <p>{{ post.text }}</p>
-    </div>
+  </div>
+  <div class="viewer-body">
+    <img src="{{ post.imageURL }}" />
+    <p>{{ post.text }}</p>
+  </div>
 </div>

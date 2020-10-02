@@ -12,6 +12,7 @@ import { Blog } from './../../models/blog';
 export class BlogDetailsComponent implements OnInit {
   post: Blog;
   postId: number;
+  showSpinner = true;
 
   constructor(
     private router: Router,
@@ -38,6 +39,7 @@ export class BlogDetailsComponent implements OnInit {
     return new Promise((resolve) => {
       this.blogService.getBlogById(postId).subscribe((post: Blog) => {
         this.post = post;
+        this.showSpinner = false;
         resolve(this.post);
       });
     });

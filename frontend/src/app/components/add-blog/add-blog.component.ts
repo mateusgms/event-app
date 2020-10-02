@@ -20,6 +20,7 @@ export class AddBlogComponent implements OnInit {
   user: User;
   postId: number;
   userId: number;
+  showSpinner = true;
 
   constructor(
     private router: Router,
@@ -39,6 +40,7 @@ export class AddBlogComponent implements OnInit {
     });
     if (this.postId == null || isNaN(this.postId)) {
       this.createPostForm(this.post);
+      this.showSpinner = false;
     } else {
       this.getPostData();
     }
@@ -81,6 +83,7 @@ export class AddBlogComponent implements OnInit {
     return new Promise((resolve) => {
       this.blogService.getBlogById(postId).subscribe((post: Blog) => {
         this.post = post;
+        this.showSpinner = false;
         resolve(this.post);
       });
     });

@@ -1,16 +1,15 @@
 <div class="viewer-wrapper">
   <div class="viewer-title">
-    <div class="viewer-title-text">
-      Novidades
-    </div>
+    <div class="viewer-title-text">Novidades</div>
   </div>
   <mat-list>
-    <mat-list-item [routerLink]="['/post',post.id]" *ngFor="let post of posts;">
+    <app-loading *ngIf="showSpinner"></app-loading>
+    <mat-list-item [routerLink]="['/post', post.id]" *ngFor="let post of posts">
       <div mat-list-icon>
-        <img src="{{post.imageURL}}">
+        <img src="{{ post.imageURL }}" />
       </div>
-      <h3 matLine> {{post.title}} </h3>
-      <p matLine> {{post.summary}} </p>
+      <h3 matLine>{{ post.title }}</h3>
+      <p matLine>{{ post.summary }}</p>
       <mat-divider></mat-divider>
     </mat-list-item>
   </mat-list>

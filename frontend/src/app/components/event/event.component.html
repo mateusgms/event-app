@@ -3,6 +3,7 @@
     <div class="viewer-title-text">Eventos</div>
   </div>
   <mat-list>
+    <app-loading *ngIf="showSpinner"></app-loading>
     <mat-list-item
       [routerLink]="['/event', event.id]"
       *ngFor="let event of events"
