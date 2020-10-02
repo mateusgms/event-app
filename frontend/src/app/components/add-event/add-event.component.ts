@@ -58,23 +58,31 @@ export class AddEventComponent implements OnInit {
         .subscribe((event: Event) => {
           this.event = event;
         });
-      return this.router.navigate(['/listevents']);
+      return this.error404();
     } else {
       this.eventService
         .updateEvent((this.event = this.newEventForm.value))
         .subscribe((event: Event) => {
           this.event = event;
         });
-      return this.router.navigate(['/listevents']);
+      return this.error404();
     }
   }
 
   getEventById(eventId: number): any {
     return new Promise((resolve) => {
-      this.eventService.getEventById(eventId).subscribe((event: Event) => {
-        this.event = event;
-        resolve(this.event);
-      });
+      this.eventService.getEventById(eventId).subscribe(
+        (event: Event) => {
+          this.event = event;
+          resolve(this.event);
+        },
+        () => {
+          this.error404();
+        },
+        () => {
+          this.showSpinner = false;
+        }
+      );
     });
   }
 
@@ -98,7 +106,10 @@ export class AddEventComponent implements OnInit {
         ],
       ],
     });
-    this.showSpinner = false;
+  }
+
+  error404(): void {
+    this.router.navigate(['/404']);
   }
 
   async getEventData() {
@@ -106,8 +117,7 @@ export class AddEventComponent implements OnInit {
       await this.getEventById(this.eventId);
       await this.createEventForm(this.event);
     } catch {
-      alert('Evento não encontrado');
-      this.router.navigate(['/listevents']);
+      this.error404();
     }
   }
 }

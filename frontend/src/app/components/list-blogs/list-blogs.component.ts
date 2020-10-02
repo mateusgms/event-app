@@ -21,34 +21,35 @@ export class ListBlogsComponent implements OnInit {
   }
 
   getBlogs(): void {
-    this.blogService.getBlogs().subscribe((blogs: Blog[]) => {
-      this.posts = blogs;
-      this.showSpinner = false;
-    });
+    this.blogService.getBlogs().subscribe(
+      (blogs: Blog[]) => {
+        this.posts = blogs;
+      },
+      () => {}, // errors
+      () => {
+        this.showSpinner = false;
+      }
+    );
   }
 
   deleteBlog(post: Blog): any {
     return new Promise((resolve) => {
-      this.blogService.deleteBlog(post).subscribe(() => {
-        this.post = post;
-      });
-      resolve(this.post);
+      this.blogService.deleteBlog(post).subscribe(
+        () => {
+          this.post = post;
+          resolve(this.post);
+        },
+        () => {}, // errors
+        () => {
+          window.location.reload();
+        }
+      );
     });
   }
 
-  refresh() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        window.location.reload();
-        resolve(this.post);
-      }, 1500);
-    });
-  }
-
-  async onClick(post: Blog) {
+  onClick(post: Blog) {
     if (confirm('Deletar este post?')) {
-      await this.deleteBlog(post);
-      await this.refresh();
+      this.deleteBlog(post);
     }
   }
 }

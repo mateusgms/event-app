@@ -19,9 +19,14 @@ export class BlogComponent implements OnInit {
     this.getBlogs();
   }
   getBlogs(): void {
-    this.blogService.getBlogs().subscribe((blogs: Blog[]) => {
-      this.posts = blogs;
-      this.showSpinner = false;
-    });
+    this.blogService.getBlogs().subscribe(
+      (blogs: Blog[]) => {
+        this.posts = blogs;
+      },
+      () => {}, // errors
+      () => {
+        this.showSpinner = false;
+      }
+    );
   }
 }

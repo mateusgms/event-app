@@ -62,30 +62,45 @@ export class AddBlogComponent implements OnInit {
         .subscribe((post: Blog) => {
           this.post = post;
         });
-      return this.router.navigate(['/listposts']);
+      return this.error404();
     } else {
       this.blogService
         .updateBlog((this.post = this.newPostForm.value))
         .subscribe((post: Blog) => {
           this.post = post;
         });
-      return this.router.navigate(['/listposts']);
+      return this.error404();
     }
   }
 
   getUserById(userId: number): void {
-    this.userService.getUserById(userId).subscribe((user: User) => {
-      this.user = user;
-    });
+    this.userService.getUserById(userId).subscribe(
+      (user: User) => {
+        this.user = user;
+      },
+      () => {
+        this.error404();
+      },
+      () => {
+        this.showSpinner = false;
+      }
+    );
   }
 
   getPostById(postId: number): any {
     return new Promise((resolve) => {
-      this.blogService.getBlogById(postId).subscribe((post: Blog) => {
-        this.post = post;
-        this.showSpinner = false;
-        resolve(this.post);
-      });
+      this.blogService.getBlogById(postId).subscribe(
+        (post: Blog) => {
+          this.post = post;
+          resolve(this.post);
+        },
+        () => {
+          this.error404();
+        },
+        () => {
+          this.showSpinner = false;
+        }
+      );
     });
   }
 
@@ -114,13 +129,16 @@ export class AddBlogComponent implements OnInit {
     this.userId = 39; // TODO - pegar userId da seção
   }
 
+  error404(): void {
+    this.router.navigate(['/404']);
+  }
+
   async getPostData() {
     try {
       await this.getPostById(this.postId);
       await this.createPostForm(this.post);
     } catch {
-      alert('Post não encontrado'); // 404
-      this.router.navigate(['/listposts']);
+      this.error404();
     }
   }
 }

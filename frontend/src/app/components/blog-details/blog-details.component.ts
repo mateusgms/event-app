@@ -1,3 +1,4 @@
+import { catchError } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -37,17 +38,23 @@ export class BlogDetailsComponent implements OnInit {
 
   getBlogById(postId: number): any {
     return new Promise((resolve) => {
-      this.blogService.getBlogById(postId).subscribe((post: Blog) => {
-        this.post = post;
-        this.showSpinner = false;
-        resolve(this.post);
-      });
+      this.blogService.getBlogById(postId).subscribe(
+        (post: Blog) => {
+          this.post = post;
+          resolve(this.post);
+        },
+        () => {
+          this.error404();
+        },
+        () => {
+          this.showSpinner = false;
+        }
+      );
     });
   }
 
   error404(): void {
-    alert('Post não encontrado'); // 404
-    this.router.navigate(['/post']);
+    this.router.navigate(['/404']);
   }
 
   async getPostData(postId: number) {
@@ -57,6 +64,7 @@ export class BlogDetailsComponent implements OnInit {
         this.error404();
       }
     } catch {
+      alert(this.post);
       this.error404();
     }
   }

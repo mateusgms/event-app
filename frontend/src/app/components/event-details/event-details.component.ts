@@ -36,17 +36,23 @@ export class EventDetailsComponent implements OnInit {
 
   getEventById(eventId: number): any {
     return new Promise((resolve) => {
-      this.eventService.getEventById(eventId).subscribe((event: Event) => {
-        this.event = event;
-        this.showSpinner = false;
-        resolve(this.event);
-      });
+      this.eventService.getEventById(eventId).subscribe(
+        (event: Event) => {
+          this.event = event;
+          resolve(this.event);
+        },
+        () => {
+          this.error404();
+        },
+        () => {
+          this.showSpinner = false;
+        }
+      );
     });
   }
 
   error404(): void {
-    alert('Evento não encontrado'); // 404
-    this.router.navigate(['/event']);
+    this.router.navigate(['/404']);
   }
 
   async getEventData(eventId: number) {
