@@ -21,34 +21,35 @@ export class ListEventsComponent implements OnInit {
   }
 
   getEvents(): void {
-    this.eventService.getEvents().subscribe((events: Event[]) => {
-      this.events = events;
-      this.showSpinner = false;
-    });
+    this.eventService.getEvents().subscribe(
+      (events: Event[]) => {
+        this.events = events;
+      },
+      () => {}, // errors
+      () => {
+        this.showSpinner = false;
+      }
+    );
   }
 
   deleteEvent(event: Event): any {
     return new Promise((resolve) => {
-      this.eventService.deleteEvent(event).subscribe(() => {
-        this.event = event;
-      });
-      resolve(this.event);
+      this.eventService.deleteEvent(event).subscribe(
+        () => {
+          this.event = event;
+          resolve(this.event);
+        },
+        () => {}, // errors
+        () => {
+          window.location.reload();
+        }
+      );
     });
   }
 
-  refresh() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        window.location.reload();
-        resolve(this.event);
-      }, 1500);
-    });
-  }
-
-  async onClick(event: Event) {
+  onClick(event: Event) {
     if (confirm('Deletar este evento?')) {
-      await this.deleteEvent(event);
-      await this.refresh();
+      this.deleteEvent(event);
     }
   }
 }

@@ -20,9 +20,14 @@ export class EventComponent implements OnInit {
   }
 
   getEvents(): any {
-    this.eventService.getEvents().subscribe((events: Event[]) => {
-      this.events = events;
-      this.showSpinner = false;
-    });
+    this.eventService.getEvents().subscribe(
+      (events: Event[]) => {
+        this.events = events;
+      },
+      () => {}, // errors
+      () => {
+        this.showSpinner = false;
+      }
+    );
   }
 }

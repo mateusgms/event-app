@@ -38,16 +38,26 @@ export class HomeComponent implements OnInit {
   }
 
   getEvents(): void {
-    this.eventService.getEvents().subscribe((events: Event[]) => {
-      this.events = events;
-      this.showSpinner2 = false;
-    });
+    this.eventService.getEvents().subscribe(
+      (events: Event[]) => {
+        this.events = events;
+      },
+      () => {}, // errors
+      () => {
+        this.showSpinner2 = false;
+      }
+    );
   }
 
   getBlogs(): void {
-    this.blogService.getBlogs().subscribe((blogs: Blog[]) => {
-      this.posts = blogs;
-      this.showSpinner3 = false;
-    });
+    this.blogService.getBlogs().subscribe(
+      (blogs: Blog[]) => {
+        this.posts = blogs;
+      },
+      () => {}, // errors
+      () => {
+        this.showSpinner3 = false;
+      }
+    );
   }
 }

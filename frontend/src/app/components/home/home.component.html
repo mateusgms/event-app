@@ -27,46 +27,61 @@
 <!-- Eventos -->
 <div style="background-color: darkgray; padding: 20px">
   <a [routerLink]="['/event']">Veja mais >></a>
-
-  <div fxLayout="row" fxLayoutAlign="space-around center" class="cards">
-    <app-loading *ngIf="showSpinner2"></app-loading>
-    <div fxFlex="20" class="card" *ngFor="let event of events.slice(0, 5)">
-      <mat-card>
-        <img mat-card-image src="{{ event.imageURL }}" />
-        <mat-card-header>
-          <mat-card-title
-            ><a [title]="event.title" [routerLink]="['/event', event.id]">
-              {{ event.title }}</a
-            >
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          {{ event.description }}
-        </mat-card-content>
-      </mat-card>
-    </div>
+  <div class="cdk-virtual-scroll-data-source-example">
+    <cdk-virtual-scroll-viewport
+      orientation="horizontal"
+      itemSize="50"
+      class="example-viewport"
+    >
+      <app-loading *ngIf="showSpinner2"></app-loading>
+      <div fxLayout="row" fxLayoutAlign="space-around center" class="cards">
+        <div fxFlex="20" class="card" *ngFor="let event of events.slice(0, 5)">
+          <mat-card>
+            <img mat-card-image src="{{ event.imageURL }}" />
+            <mat-card-header>
+              <mat-card-title
+                ><a [title]="event.title" [routerLink]="['/event', event.id]">
+                  {{ event.title }}</a
+                >
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              {{ event.description }}
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
   </div>
 </div>
 
 <!-- Novidades -->
 <div style="padding: 20px">
   <a [routerLink]="['/post']">Veja mais >></a>
-  <div fxLayout="row" fxLayoutWrap class="cards">
-    <div fxFlex="20" class="card" *ngFor="let post of posts.slice(0, 5)">
+  <div class="cdk-virtual-scroll-data-source-example">
+    <cdk-virtual-scroll-viewport
+      orientation="horizontal"
+      itemSize="50"
+      class="example-viewport"
+    >
       <app-loading *ngIf="showSpinner3"></app-loading>
-      <mat-card>
-        <img mat-card-image src="{{ post.imageURL }}" />
-        <mat-card-header>
-          <mat-card-title
-            ><a [title]="post.title" [routerLink]="['/post', post.id]">
-              {{ post.title }}</a
-            ></mat-card-title
-          >
-        </mat-card-header>
-        <mat-card-content>
-          {{ post.summary }}
-        </mat-card-content>
-      </mat-card>
-    </div>
+      <div fxLayout="row" fxLayoutWrap class="cards">
+        <div fxFlex="20" class="card" *ngFor="let post of posts.slice(0, 5)">
+          <mat-card>
+            <img mat-card-image src="{{ post.imageURL }}" />
+            <mat-card-header>
+              <mat-card-title
+                ><a [title]="post.title" [routerLink]="['/post', post.id]">
+                  {{ post.title }}</a
+                ></mat-card-title
+              >
+            </mat-card-header>
+            <mat-card-content>
+              {{ post.summary }}
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
   </div>
 </div>
