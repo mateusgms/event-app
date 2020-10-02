@@ -12,6 +12,7 @@ export class ListBlogsComponent implements OnInit {
   post = {} as Blog;
   posts: Blog[];
   displayedColumns: string[] = ['imageURL', 'title', 'actions'];
+  showSpinner = true;
 
   constructor(private blogService: BlogService) {}
 
@@ -22,6 +23,7 @@ export class ListBlogsComponent implements OnInit {
   getBlogs(): void {
     this.blogService.getBlogs().subscribe((blogs: Blog[]) => {
       this.posts = blogs;
+      this.showSpinner = false;
     });
   }
 

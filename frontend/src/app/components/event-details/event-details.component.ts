@@ -12,6 +12,7 @@ import { Event } from './../../models/event';
 export class EventDetailsComponent implements OnInit {
   event: Event;
   eventId: number;
+  showSpinner = true;
 
   constructor(
     private router: Router,
@@ -37,6 +38,7 @@ export class EventDetailsComponent implements OnInit {
     return new Promise((resolve) => {
       this.eventService.getEventById(eventId).subscribe((event: Event) => {
         this.event = event;
+        this.showSpinner = false;
         resolve(this.event);
       });
     });

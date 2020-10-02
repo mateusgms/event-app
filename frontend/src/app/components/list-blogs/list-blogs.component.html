@@ -7,6 +7,7 @@
 <table mat-table [dataSource]="posts" class="mat-elevation-z8">
   <caption>
     Lista de Posts
+    <app-loading *ngIf="showSpinner"></app-loading>
   </caption>
 
   <!-- imageURL Column -->

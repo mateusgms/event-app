@@ -12,6 +12,7 @@ export class ListEventsComponent implements OnInit {
   event = {} as Event;
   events: Event[];
   displayedColumns: string[] = ['imageURL', 'title', 'actions'];
+  showSpinner = true;
 
   constructor(private router: Router, private eventService: EventService) {}
 
@@ -22,6 +23,7 @@ export class ListEventsComponent implements OnInit {
   getEvents(): void {
     this.eventService.getEvents().subscribe((events: Event[]) => {
       this.events = events;
+      this.showSpinner = false;
     });
   }
 

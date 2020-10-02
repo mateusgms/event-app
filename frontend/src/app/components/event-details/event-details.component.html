@@ -1,4 +1,5 @@
 <div class="viewer-wrapper">
+  <app-loading *ngIf="showSpinner"></app-loading>
   <div class="viewer-title">
     <div class="viewer-title-text">
       {{ event.title }}
@@ -11,6 +12,7 @@
       mat-raised-button
       [routerLink]="['/voucher', event.id]"
       color="primary"
+      *ngIf="!showSpinner"
     >
       Inscrever-se
     </button>

@@ -14,6 +14,7 @@ import { ListEventsComponent } from './components/list-events/list-events.compon
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -80,6 +81,11 @@ const routes: Routes = [
     path: 'addevent/:eventId',
     component: AddEventComponent,
   },
+  {
+    path: '404',
+    component: NotFoundComponent,
+  },
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({

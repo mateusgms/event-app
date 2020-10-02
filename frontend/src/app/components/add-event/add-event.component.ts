@@ -16,6 +16,7 @@ export class AddEventComponent implements OnInit {
   newEventForm: FormGroup;
   submitted = false;
   eventId: number;
+  showSpinner = true;
 
   constructor(
     private router: Router,
@@ -35,6 +36,7 @@ export class AddEventComponent implements OnInit {
 
     if (this.eventId == null || isNaN(this.eventId)) {
       this.createEventForm(this.event);
+      this.showSpinner = false;
     } else {
       this.getEventData();
     }
@@ -96,6 +98,7 @@ export class AddEventComponent implements OnInit {
         ],
       ],
     });
+    this.showSpinner = false;
   }
 
   async getEventData() {
