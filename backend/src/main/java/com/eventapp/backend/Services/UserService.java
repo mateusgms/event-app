@@ -10,12 +10,12 @@ import com.eventapp.backend.Repository.BlogRepository;
 import com.eventapp.backend.Repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    
+
     @Autowired
     private UserRepository userRepository;
 
@@ -25,11 +25,11 @@ public class UserService {
     @Autowired
     private BlogService blogService;
 
-    @Autowired
-    private BCryptPasswordEncoder bCrypt;
+    // @Autowired
+    // private BCryptPasswordEncoder bCrypt;
 
     public User saveUser(User user) {
-        user.setPassword(bCrypt.encode(user.getPassword()));
+        // user.setPassword(bCrypt.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
