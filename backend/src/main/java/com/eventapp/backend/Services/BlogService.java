@@ -2,11 +2,11 @@ package com.eventapp.backend.Services;
 
 import java.util.List;
 
-import com.eventapp.backend.Controller.exception.BlogNotFoundException;
-import com.eventapp.backend.Controller.exception.UserNotFoundException;
 import com.eventapp.backend.Model.Blog;
 import com.eventapp.backend.Model.User;
 import com.eventapp.backend.Repository.BlogRepository;
+import com.eventapp.backend.exception.BlogNotFoundException;
+import com.eventapp.backend.exception.UserNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
