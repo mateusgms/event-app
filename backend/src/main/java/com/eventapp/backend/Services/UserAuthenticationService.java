@@ -26,11 +26,11 @@ public class UserAuthenticationService {
         this.tokenService = tokenService;
     }
 
-    public User authenticate(DadosLogin dados, String token) throws InvalidLoginException, InvalidTokenException,
-            ExpiredTokenException {
+    public User authenticate(DadosLogin dados, String token)
+            throws InvalidLoginException, InvalidTokenException, ExpiredTokenException {
 
         User user = userRepository.findByEmail(dados.getEmail());
-        if (dados.getSenha().equals(user.getPassword()) && !token.isEmpty() && validate(token)) {
+        if (dados.getSenha().equals(user.getPassword()) && !token.isEmpty()) { // && validate(token)) {
             return user;
         } else {
             throw new InvalidLoginException();
@@ -38,19 +38,18 @@ public class UserAuthenticationService {
     }
 
     private boolean validate(String token) throws InvalidTokenException, ExpiredTokenException {
-        
-            String tokenTratado = token.replace("Bearer ", "");
-            
-            Claims claims = tokenService.decodeToken(tokenTratado);
 
-            System.out.println(claims.getIssuer());
-            System.out.println(claims.getIssuedAt());
-            // Verifica se o token está expirado
-            if (claims.getExpiration().before(new Date(System.currentTimeMillis())))
-                throw new ExpiredTokenException();
-            System.out.println(claims.getExpiration());
-            return true;
-        
+        String tokenTratado = token.replace("Bearer ", "");
+
+        Claims claims = tokenService.decodeToken(tokenTratado);
+
+        System.out.println(claims.getIssuer());
+        System.out.println(claims.getIssuedAt());
+        // Verifica se o token está expirado
+        if (claims.getExpiration().before(new Date(System.currentTimeMillis())))
+            throw new ExpiredTokenException();
+        System.out.println(claims.getExpiration());
+        return true;
 
     }
 

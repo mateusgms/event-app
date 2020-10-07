@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
+    @Autowired
     private UserAuthenticationService userAuthenticationService;
 
+    @Autowired
     private UserRegistrationService userRegistrationService;
 
     @Autowired
@@ -64,7 +66,7 @@ public class LoginController {
 
         User user = userRegistrationService.registrate(userRegistrationDTO.toUser());
 
-        return  new ResponseEntity<UserAutheticatedDTO>(UserAutheticatedDTO.toDTO(user, "Bearer "), HttpStatus.CREATED);
+        return new ResponseEntity<UserAutheticatedDTO>(UserAutheticatedDTO.toDTO(user, "Bearer "), HttpStatus.CREATED);
 
     }
 
