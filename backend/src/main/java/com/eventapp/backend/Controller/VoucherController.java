@@ -3,9 +3,6 @@ package com.eventapp.backend.Controller;
 import java.util.Date;
 import java.util.List;
 
-import com.eventapp.backend.Controller.exception.EventNotFoundException;
-import com.eventapp.backend.Controller.exception.UserNotFoundException;
-import com.eventapp.backend.Controller.exception.VoucherNotFoundException;
 import com.eventapp.backend.Model.Event;
 import com.eventapp.backend.Model.User;
 import com.eventapp.backend.Model.Voucher;
@@ -13,6 +10,9 @@ import com.eventapp.backend.Repository.EventRepository;
 import com.eventapp.backend.Repository.UserRepository;
 import com.eventapp.backend.Repository.VoucherRepository;
 import com.eventapp.backend.Services.VoucherService;
+import com.eventapp.backend.exception.EventNotFoundException;
+import com.eventapp.backend.exception.UserNotFoundException;
+import com.eventapp.backend.exception.VoucherNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,9 +24,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController

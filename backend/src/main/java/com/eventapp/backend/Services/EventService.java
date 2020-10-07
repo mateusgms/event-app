@@ -2,9 +2,9 @@ package com.eventapp.backend.Services;
 
 import java.util.List;
 
-import com.eventapp.backend.Controller.exception.EventNotFoundException;
 import com.eventapp.backend.Model.Event;
 import com.eventapp.backend.Repository.EventRepository;
+import com.eventapp.backend.exception.EventNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

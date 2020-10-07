@@ -1,4 +1,4 @@
-package com.eventapp.backend.Controller.exception;
+package com.eventapp.backend.exception;
 
 public class UserNotFoundException extends Exception{
 

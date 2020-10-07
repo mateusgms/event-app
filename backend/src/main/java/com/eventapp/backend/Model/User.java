@@ -1,6 +1,6 @@
 package com.eventapp.backend.Model;
 
-import java.sql.Date;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,32 +26,35 @@ public class User {
 	private String name;
 
 	@NonNull
-	@Column(unique=true)
+	@Column(unique = true)
 	private String email;
-	
+
 	@NonNull
 	private String phone;
 
 	@NonNull
 	private String address;
-	
+
 	@NonNull
 	private String uf;
-	
+
 	@NonNull
 	private String country;
-	
+
 	@NonNull
 	private String password;
 
 	@NonNull
 	private Date date;
-	
+
+	private String token;
+
 	private Boolean isAdmin;
-    
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -126,15 +129,31 @@ public class User {
 	}
 
 	public void setIsAdmin(Boolean isAdmin, User user) {
-		if(user.isAdmin){
-			this.isAdmin= isAdmin;
-		}
-		else{
+		if (user.isAdmin) {
+			this.isAdmin = isAdmin;
+		} else {
 			this.isAdmin = false;
 		}
 	}
-	public User orElseThrow(Object object) {
-		return null;
+
+	public void setToken(String token) {
+		this.token = token;
 	}
-	
+
+	public String getToken() {
+		return token;
+	}
+
+	public User(@NonNull String name, @NonNull String email, @NonNull String phone, @NonNull String address,
+			@NonNull String uf, @NonNull String country, @NonNull String password, @NonNull Date date) {
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+		this.uf = uf;
+		this.country = country;
+		this.password = password;
+		this.date = date;
+	}
+
 }
