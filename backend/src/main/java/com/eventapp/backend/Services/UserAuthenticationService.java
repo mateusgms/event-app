@@ -26,18 +26,28 @@ public class UserAuthenticationService {
         this.tokenService = tokenService;
     }
 
-    public User authenticate(DadosLogin dados, String token)
+    public boolean authenticate(DadosLogin dados, String token)
             throws InvalidLoginException, InvalidTokenException, ExpiredTokenException {
 
         User user = userRepository.findByEmail(dados.getEmail());
 
         System.out.println(user.getName());
         System.out.println("Senha igual: " + dados.getSenha().equals(user.getPassword()));
-        System.out.println("Token vazio: " + token.isEmpty());
-        if (dados.getSenha().equals(user.getPassword()) && !token.isEmpty() && validate(token)) {
-            return user;
+        System.out.println("Token vazio: " + !token.isEmpty());
+        ///System.out.println("Validado: " + validate(token));
+        if (dados.getSenha().equals(user.getPassword())) {
+            
+            if (!token.isEmpty() /*&& validate(token)*/) {
+                return true;
+            }else{
+                tokenService.generateToken(user);
+                System.out.println("NOVO TOKEN: " + user.getToken());
+                return true;
+            }
+            
+
         } else {
-            throw new InvalidLoginException();
+            throw new InvalidLoginException(user.getId());
         }
     }
 

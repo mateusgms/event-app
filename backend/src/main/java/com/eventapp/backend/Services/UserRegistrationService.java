@@ -22,5 +22,9 @@ public class UserRegistrationService {
         user.setToken(tokenService.generateToken(user));
         return userRepository.save(user);
     }
+    public User update(User user){
+        user.setToken(tokenService.generateToken(user));
+        return userRepository.save(user);
+    }
 
 }
