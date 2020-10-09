@@ -7,6 +7,9 @@ import com.eventapp.backend.Model.User;
 import com.eventapp.backend.Services.BlogService;
 import com.eventapp.backend.Services.UserService;
 import com.eventapp.backend.exception.BlogNotFoundException;
+import com.eventapp.backend.exception.ExpiredTokenException;
+import com.eventapp.backend.exception.InvalidLoginException;
+import com.eventapp.backend.exception.InvalidTokenException;
 import com.eventapp.backend.exception.UserNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,9 +38,10 @@ public class BlogController {
 
     // CREATE
     @PostMapping("/blogs")
-    public ResponseEntity<Blog> addBlog(@RequestBody Blog blog, @RequestParam("userId") int userId)
-            throws UserNotFoundException {
-
+    public ResponseEntity<Blog> addBlog(@RequestBody Blog blog, @RequestParam("userId") int userId,
+            @RequestHeader String Authorization)
+            throws UserNotFoundException, InvalidLoginException, InvalidTokenException, ExpiredTokenException {
+        
         User user = userService.getUserById(userId);
         blog.setAuthor(user);
         Blog blogSave = blogService.saveBlog(blog);

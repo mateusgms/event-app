@@ -3,6 +3,7 @@ package com.eventapp.backend.Controller;
 import com.eventapp.backend.Model.User;
 import com.eventapp.backend.Services.UserAuthenticationService;
 import com.eventapp.backend.Services.UserRegistrationService;
+import com.eventapp.backend.Services.UserService;
 import com.eventapp.backend.dto.DadosLogin;
 import com.eventapp.backend.dto.UserAutheticatedDTO;
 import com.eventapp.backend.dto.UserRegistrationDTO;
@@ -30,6 +31,9 @@ public class LoginController {
     private UserRegistrationService userRegistrationService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     public LoginController(UserAuthenticationService userAuthenticationService) {
         this.userAuthenticationService = userAuthenticationService;
     }
@@ -42,11 +46,22 @@ public class LoginController {
     public ResponseEntity<UserAutheticatedDTO> authentication(@RequestBody DadosLogin dadosLogin,
             @RequestHeader String Authorization)
             throws InvalidLoginException, InvalidTokenException, ExpiredTokenException {
+                
+                if(userAuthenticationService.authenticate(dadosLogin, Authorization)){
+                    String email = dadosLogin.getEmail();
+                    User user = userService.getUserByEmail(email);
+                    System.out.println(user);
+                    return new ResponseEntity<UserAutheticatedDTO>(UserAutheticatedDTO.toDTO(user, "Bearer "), HttpStatus.ACCEPTED);
+                } else {
+                    String email = dadosLogin.getEmail();
+                    User user = userService.getUserByEmail(email);
+                    System.out.println(user);
+                    return new ResponseEntity<UserAutheticatedDTO>(UserAutheticatedDTO.toDTO(user, "Bearer "), HttpStatus.UNAUTHORIZED);
+                }
+        
+        
 
-        User user = userAuthenticationService.authenticate(dadosLogin, Authorization);
-        System.out.println(user);
-
-        return new ResponseEntity<UserAutheticatedDTO>(UserAutheticatedDTO.toDTO(user, "Bearer "), HttpStatus.ACCEPTED);
+        
         /*
          * if (user.getEmail().isEmpty()) { System.err.println("Credenciais inválidas");
          * return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST); } else { if

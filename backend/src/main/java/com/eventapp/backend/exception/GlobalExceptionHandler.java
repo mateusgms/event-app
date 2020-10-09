@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler({ UserNotFoundException.class, ContentNotAllowedException.class, EventNotFoundException.class,
-            VoucherNotFoundException.class, BlogNotFoundException.class })
+            VoucherNotFoundException.class, BlogNotFoundException.class, InvalidLoginException.class})
     @Nullable
     public final ResponseEntity<ApiError> handleException(Exception ex, WebRequest request) {
 
@@ -49,13 +49,16 @@ public class GlobalExceptionHandler {
             VoucherNotFoundException vnfe = (VoucherNotFoundException) ex;
 
             return handleVoucherNotFoundException(vnfe, headers, status, request);
-        }
-        if (ex instanceof BlogNotFoundException) {
+        }else if (ex instanceof BlogNotFoundException) {
             HttpStatus status = HttpStatus.NOT_FOUND;
             BlogNotFoundException vnfe = (BlogNotFoundException) ex;
 
             return handleBlogNotFoundException(vnfe, headers, status, request);
-        } else {
+        } else if (ex instanceof InvalidLoginException) {
+            HttpStatus status = HttpStatus.UNAUTHORIZED;
+            InvalidLoginException ile = (InvalidLoginException) ex;
+            return handleInvalidLoginException(ile, headers, status, request);
+        } else  {
             if (LOGGER.isWarnEnabled()) {
                 LOGGER.warn("Erro desconhecido do tipo: " + ex.getClass().getName());
             }
@@ -63,6 +66,12 @@ public class GlobalExceptionHandler {
             return handleExceptionInternal(ex, null, headers, status, request);
         }
 
+    }
+
+    private ResponseEntity<ApiError> handleInvalidLoginException(InvalidLoginException ile, HttpHeaders headers,
+            HttpStatus status, WebRequest request) {
+                List<String> errorMessages = Collections.singletonList(ile.getMessage());
+                return handleExceptionInternal(ile, new ApiError(errorMessages), headers, status, request);
     }
 
     protected ResponseEntity<ApiError> handleVoucherNotFoundException(VoucherNotFoundException ex, HttpHeaders headers,
