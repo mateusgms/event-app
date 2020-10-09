@@ -10,6 +10,7 @@ import com.eventapp.backend.exception.InvalidLoginException;
 import com.eventapp.backend.exception.InvalidTokenException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
@@ -34,17 +35,17 @@ public class UserAuthenticationService {
         System.out.println(user.getName());
         System.out.println("Senha igual: " + dados.getSenha().equals(user.getPassword()));
         System.out.println("Token vazio: " + !token.isEmpty());
-        ///System.out.println("Validado: " + validate(token));
+        /// System.out.println("Validado: " + validate(token));
+        // if (BCrypt.checkpw(dados.getSenha(), user.getPassword())) {
         if (dados.getSenha().equals(user.getPassword())) {
-            
-            if (!token.isEmpty() /*&& validate(token)*/) {
+
+            if (!token.isEmpty() /* && validate(token) */) {
                 return true;
-            }else{
+            } else {
                 tokenService.generateToken(user);
                 System.out.println("NOVO TOKEN: " + user.getToken());
                 return true;
             }
-            
 
         } else {
             throw new InvalidLoginException(user.getId());
