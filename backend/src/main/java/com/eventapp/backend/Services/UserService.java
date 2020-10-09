@@ -10,7 +10,7 @@ import com.eventapp.backend.exception.BlogNotFoundException;
 import com.eventapp.backend.exception.UserNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,11 +25,8 @@ public class UserService {
     @Autowired
     private BlogService blogService;
 
-    // @Autowired
-    // private BCryptPasswordEncoder bCrypt;
-
     public User saveUser(User user) {
-        // user.setPassword(bCrypt.encode(user.getPassword()));
+        // user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         return userRepository.save(user);
     }
 
@@ -91,6 +88,8 @@ public class UserService {
         existingUser.setEmail(user.getEmail());
         existingUser.setName(user.getName());
         existingUser.setPassword(user.getPassword());
+        // existingUser.setPassword(BCrypt.hashpw(user.getPassword(),
+        // BCrypt.gensalt()));
         existingUser.setPhone(user.getPhone());
         existingUser.setUf(user.getUf());
         existingUser.setIsAdmin(user.getIsAdmin());
