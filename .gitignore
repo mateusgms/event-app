@@ -34,3 +34,9 @@ backend/src/main/resources/application.properties
 backend/src/main/resources/application.yml
 backend/src/main/resources/application.yml
 backend/src/main/resources/application.properties
+frontend/.vscode/settings.json
+
+# IDE - VSCode
+.vscode/*
+frontend/.vscode/*
+backend/.vscode/*
