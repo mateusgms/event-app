@@ -10,7 +10,7 @@ import com.eventapp.backend.exception.BlogNotFoundException;
 import com.eventapp.backend.exception.UserNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,13 +25,13 @@ public class UserService {
     @Autowired
     private BlogService blogService;
 
-    public User saveUser(User user) {
-        // user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-        return userRepository.save(user);
-    }
+    @Autowired
+    private TokenService tokenService;
 
-    public List<User> saveUsers(List<User> users) {
-        return userRepository.saveAll(users);
+    public User saveUser(User user) {
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        user.setToken(tokenService.generateToken(user));
+        return userRepository.save(user);
     }
 
     public List<User> getUsers() {
@@ -87,9 +87,8 @@ public class UserService {
         existingUser.setDate(user.getDate());
         existingUser.setEmail(user.getEmail());
         existingUser.setName(user.getName());
-        existingUser.setPassword(user.getPassword());
-        // existingUser.setPassword(BCrypt.hashpw(user.getPassword(),
-        // BCrypt.gensalt()));
+        // existingUser.setPassword(user.getPassword());
+        existingUser.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         existingUser.setPhone(user.getPhone());
         existingUser.setUf(user.getUf());
         existingUser.setIsAdmin(user.getIsAdmin());
