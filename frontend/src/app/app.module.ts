@@ -17,6 +17,8 @@ import { VoucherComponent } from './components/voucher/voucher.component';
 import { SupportComponent } from './components/support/support.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 // Modules
 import { NgModule } from '@angular/core';
@@ -59,6 +61,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     AddBlogComponent,
     DashboardComponent,
     LoadingComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
