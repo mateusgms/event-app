@@ -23,18 +23,18 @@
           <mat-label>Senha</mat-label>
           <input
             matInput
-            [type]="hide ? 'password' : 'text'"
+            [type]="hide1 ? 'password' : 'text'"
             [formControl]="password"
             class="form-control"
           />
           <button
             mat-icon-button
             matSuffix
-            (click)="hide = !hide"
+            (click)="hide1 = !hide1"
             [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide"
+            [attr.aria-pressed]="hide1"
           >
-            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            <mat-icon>{{ hide1 ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
         </mat-form-field>
         <button mat-raised-button type="submit" color="primary">
@@ -163,7 +163,7 @@
           <mat-label>Senha</mat-label>
           <input
             matInput
-            [type]="hide ? 'password' : 'text'"
+            [type]="hide2 ? 'password' : 'text'"
             formControlName="password"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
@@ -171,11 +171,11 @@
           <button
             mat-icon-button
             matSuffix
-            (click)="hide = !hide"
+            (click)="hide2 = !hide2"
             [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide"
+            [attr.aria-pressed]="hide2"
           >
-            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            <mat-icon>{{ hide2 ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">Senha is required</div>
@@ -188,7 +188,7 @@
           <mat-label>Confirmar Senha</mat-label>
           <input
             matInput
-            [type]="hide ? 'password' : 'text'"
+            [type]="hide3 ? 'password' : 'text'"
             formControlName="confirmPassword"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
@@ -196,11 +196,11 @@
           <button
             mat-icon-button
             matSuffix
-            (click)="hide = !hide"
+            (click)="hide3 = !hide3"
             [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide"
+            [attr.aria-pressed]="hide3"
           >
-            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            <mat-icon>{{ hide3 ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
           <div
             *ngIf="submitted && f.confirmPassword.errors"

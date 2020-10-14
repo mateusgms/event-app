@@ -9,8 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResetPasswordComponent implements OnInit {
   password = new FormControl('', [Validators.required]);
-  rePassword = new FormControl('', [Validators.required]);
+  confirmPassword = new FormControl('', [Validators.required]);
   submitted = false;
+  hide1 = true;
+  hide2 = true;
   userId: number;
 
   constructor(private router: Router) {}
@@ -21,10 +23,10 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-    if (this.rePassword.invalid) {
+    if (this.confirmPassword.invalid) {
       return;
     } else {
-      // resetPasswordService.resetPassword(this.rePassword, this.userId).subscribe(response: boolean)=>{ this.response = response };
+      // resetPasswordService.resetPassword(this.confirmPassword, this.userId).subscribe(response: boolean)=>{ this.response = response };
       alert('senha alterada');
       this.router.navigate(['/login']);
     }
