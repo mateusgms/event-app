@@ -18,7 +18,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./log-in.component.css'],
 })
 export class LogInComponent implements OnInit {
-  hide = true;
+  hide1 = true;
+  hide2 = true;
+  hide3 = true;
 
   email = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
@@ -83,10 +85,8 @@ export class LogInComponent implements OnInit {
     this.submitted = true;
 
     if (this.registerForm.invalid) {
-      alert('vim aqui');
       return;
     } else {
-      //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
       return this.userService
         .saveUser((this.user = this.registerForm.value))
         .subscribe((user: User) => {
