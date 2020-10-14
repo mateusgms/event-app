@@ -15,6 +15,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -80,6 +82,14 @@ const routes: Routes = [
   {
     path: 'addevent/:eventId',
     component: AddEventComponent,
+  },
+  {
+    path: 'forgot',
+    component: ForgotPasswordComponent,
+  },
+  {
+    path: 'reset',
+    component: ResetPasswordComponent,
   },
   {
     path: '404',

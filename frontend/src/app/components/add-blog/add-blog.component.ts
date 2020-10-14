@@ -73,20 +73,6 @@ export class AddBlogComponent implements OnInit {
     }
   }
 
-  getUserById(userId: number): void {
-    this.userService.getUserById(userId).subscribe(
-      (user: User) => {
-        this.user = user;
-      },
-      () => {
-        this.error404();
-      },
-      () => {
-        this.showSpinner = false;
-      }
-    );
-  }
-
   getPostById(postId: number): any {
     return new Promise((resolve) => {
       this.blogService.getBlogById(postId).subscribe(
