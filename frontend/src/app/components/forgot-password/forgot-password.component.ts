@@ -20,7 +20,7 @@ export class ForgotPasswordComponent implements OnInit {
     if (this.email.invalid) {
       return;
     } else {
-      alert('Um email foi enviado com o link que alteração de senha.');
+      alert('Um email foi enviado com o link para alteração de senha.');
       this.router.navigate(['/reset']);
     }
   }

@@ -8,6 +8,7 @@ import {
 
 import { MustMatch } from '../../_helpers/must-match.validator';
 import { UserService } from './../../services/user.service';
+import { CookieService } from 'ngx-cookie-service';
 // import { AuthService } from './../../services/auth.service';
 import { User } from './../../models/user';
 import { Router } from '@angular/router';
@@ -36,6 +37,7 @@ export class LogInComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     // private authService: AuthService,
+    private cookieService: CookieService,
     private router: Router
   ) {}
 
@@ -70,12 +72,6 @@ export class LogInComponent implements OnInit {
     );
   }
 
-  getUsers(): void {
-    this.userService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
-    });
-  }
-
   // convenience getter for easy access to form fields
   get f() {
     return this.registerForm.controls;
@@ -94,21 +90,31 @@ export class LogInComponent implements OnInit {
         });
     }
   }
+
   loginSubmit() {
     // const val = this.loginForm.value;
-    // if(this.loginForm.invalid){
-    //   alert('deu ruim')
+    // if (this.loginForm.invalid) {
+    //   alert('deu ruim');
     //   return;
-    // } else{
-    //   if(val.email && val.password){
-    //     this.authService.login(val.email, val.password)
-    //       .subscribe(()=>{
+    // } else {
+    //   if (val.email && val.password) {
+    //     this.authService.login(val.email, val.password).subscribe(
+    //       (user: User) => {
+    //         this.user = user;
+    //         this.cookieService.set('user', this.user.token);
     //         alert('User logado');
+    //       },
+    //       () => {
+    //         alert('Erro no Login');
+    //       }, // errors
+    //       () => {
     //         this.router.navigateByUrl('/dashboard');
-    //       })
+    //       }
+    //     );
     //   }
     // }
   }
+
   onReset(): void {
     this.submitted = false;
     this.registerForm.reset();
