@@ -2,23 +2,23 @@ import { catchError } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { BlogService } from './../../services/blog.service';
-import { Blog } from './../../models/blog';
+import { PostService } from './../../services/post.service';
+import { Post } from './../../models/post';
 
 @Component({
-  selector: 'app-blog-details',
-  templateUrl: './blog-details.component.html',
-  styleUrls: ['./blog-details.component.css'],
+  selector: 'app-post-details',
+  templateUrl: './post-details.component.html',
+  styleUrls: ['./post-details.component.css'],
 })
-export class BlogDetailsComponent implements OnInit {
-  post: Blog;
+export class PostDetailsComponent implements OnInit {
+  post: Post;
   postId: number;
   showSpinner = true;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private blogService: BlogService
+    private postService: PostService
   ) {}
 
   ngOnInit(): void {
@@ -36,10 +36,10 @@ export class BlogDetailsComponent implements OnInit {
     }
   }
 
-  getBlogById(postId: number): any {
+  getPostById(postId: number): any {
     return new Promise((resolve) => {
-      this.blogService.getBlogById(postId).subscribe(
-        (post: Blog) => {
+      this.postService.getPostById(postId).subscribe(
+        (post: Post) => {
           this.post = post;
           resolve(this.post);
         },
@@ -59,7 +59,7 @@ export class BlogDetailsComponent implements OnInit {
 
   async getPostData(postId: number) {
     try {
-      await this.getBlogById(postId);
+      await this.getPostById(postId);
       if (this.post == null) {
         this.error404();
       }

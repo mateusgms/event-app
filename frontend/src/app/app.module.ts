@@ -2,16 +2,16 @@
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LogInComponent } from './components/log-in/log-in.component';
-import { BlogComponent } from './components/blog/blog.component';
+import { PostComponent } from './components/post/post.component';
 import { EventComponent } from './components/event/event.component';
-import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
+import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { ListEventsComponent } from './components/list-events/list-events.component';
-import { ListBlogsComponent } from './components/list-blogs/list-blogs.component';
+import { ListPostsComponent } from './components/list-posts/list-posts.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
-import { AddBlogComponent } from './components/add-blog/add-blog.component';
+import { AddPostComponent } from './components/add-post/add-post.component';
 import { FootBarComponent } from './components/foot-bar/foot-bar.component';
 import { VoucherComponent } from './components/voucher/voucher.component';
 import { SupportComponent } from './components/support/support.component';
@@ -51,17 +51,17 @@ import { CookieService } from 'ngx-cookie-service';
     TopBarComponent,
     LogInComponent,
     EventDetailsComponent,
-    BlogDetailsComponent,
+    PostDetailsComponent,
     EventComponent,
-    BlogComponent,
+    PostComponent,
     FootBarComponent,
     SupportComponent,
     ListUsersComponent,
     ListEventsComponent,
-    ListBlogsComponent,
+    ListPostsComponent,
     VoucherComponent,
     AddEventComponent,
-    AddBlogComponent,
+    AddPostComponent,
     DashboardComponent,
     LoadingComponent,
     ForgotPasswordComponent,
