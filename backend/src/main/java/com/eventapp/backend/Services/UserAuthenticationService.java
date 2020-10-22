@@ -41,7 +41,7 @@ public class UserAuthenticationService {
         if (BCrypt.checkpw(dados.getSenha(), user.getPassword())) {
             // if (dados.getSenha().equals(user.getPassword())) {
 
-            if (!token.isEmpty() /* && validate(token) */) {
+            if (!token.isEmpty()  && validate(token)) {
                 return true;
             } else {
                 user.setToken(tokenService.generateToken(user));
@@ -59,14 +59,15 @@ public class UserAuthenticationService {
         String tokenTratado = token.replace("Bearer ", "");
 
         Claims claims = tokenService.decodeToken(tokenTratado);
-
+        
         System.out.println(claims.getIssuer());
         System.out.println(claims.getIssuedAt());
+
+        
         // Verifica se o token está expirado
         if (claims.getExpiration().before(new Date(System.currentTimeMillis())))
-            throw new ExpiredTokenException();
-        System.out.println(claims.getExpiration());
-        return true;
+            System.out.println(claims.getExpiration());
+            return false;
 
     }
 
