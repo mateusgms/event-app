@@ -42,11 +42,6 @@ export class AddEventComponent implements OnInit {
     }
   }
 
-  // convenience getter for easy access to form fields
-  get f() {
-    return this.newEventForm.controls;
-  }
-
   onSubmit(): any {
     this.submitted = true;
     if (this.newEventForm.invalid) {
@@ -130,7 +125,7 @@ export class AddEventComponent implements OnInit {
     this.router.navigate(['/404']);
   }
 
-  async getEventData() {
+  async getEventData(): Promise<void> {
     try {
       await this.getEventById(this.eventId);
       await this.createEventForm(this.event);

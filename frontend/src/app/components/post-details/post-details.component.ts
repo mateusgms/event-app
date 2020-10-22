@@ -1,4 +1,3 @@
-import { catchError } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -57,7 +56,7 @@ export class PostDetailsComponent implements OnInit {
     this.router.navigate(['/404']);
   }
 
-  async getPostData(postId: number) {
+  async getPostData(postId: number): Promise<void> {
     try {
       await this.getPostById(postId);
       if (this.post == null) {

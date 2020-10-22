@@ -52,7 +52,7 @@ export class ListEventsComponent implements OnInit {
     });
   }
 
-  onClick(event: Event) {
+  onClick(event: Event): void {
     if (confirm('Deletar este evento?')) {
       this.deleteEvent(event);
     }

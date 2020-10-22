@@ -55,7 +55,7 @@ export class EventDetailsComponent implements OnInit {
     this.router.navigate(['/404']);
   }
 
-  async getEventData(eventId: number) {
+  async getEventData(eventId: number): Promise<void> {
     try {
       await this.getEventById(eventId);
       if (this.event == null) {

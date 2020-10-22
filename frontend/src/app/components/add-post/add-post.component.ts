@@ -46,11 +46,6 @@ export class AddPostComponent implements OnInit {
     }
   }
 
-  // convenience getter for easy access to form fields
-  get f(): any {
-    return this.newPostForm.controls;
-  }
-
   onSubmit(): any {
     alert(JSON.stringify(this.newPostForm.value));
     this.submitted = true;
@@ -139,7 +134,7 @@ export class AddPostComponent implements OnInit {
     this.router.navigate(['/404']);
   }
 
-  async getPostData() {
+  async getPostData(): Promise<void> {
     try {
       await this.getPostById(this.postId);
       await this.createPostForm(this.post);

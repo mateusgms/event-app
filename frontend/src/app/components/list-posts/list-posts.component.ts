@@ -52,7 +52,7 @@ export class ListPostsComponent implements OnInit {
     });
   }
 
-  onClick(post: Post) {
+  onClick(post: Post): void {
     if (confirm('Deletar este post?')) {
       this.deletePost(post);
     }

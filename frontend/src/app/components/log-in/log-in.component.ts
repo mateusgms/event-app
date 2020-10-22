@@ -72,11 +72,6 @@ export class LogInComponent implements OnInit {
     );
   }
 
-  // convenience getter for easy access to form fields
-  get f() {
-    return this.registerForm.controls;
-  }
-
   onSubmit(): any {
     this.submitted = true;
 
@@ -91,7 +86,7 @@ export class LogInComponent implements OnInit {
     }
   }
 
-  loginSubmit() {
+  loginSubmit(): void {
     // const val = this.loginForm.value;
     // if (this.loginForm.invalid) {
     //   alert('deu ruim');
