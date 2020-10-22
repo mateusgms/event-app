@@ -55,17 +55,34 @@ export class AddEventComponent implements OnInit {
     } else if (this.eventId == null) {
       this.eventService
         .saveEvent((this.event = this.newEventForm.value))
-        .subscribe((event: Event) => {
-          this.event = event;
-        });
+        .subscribe(
+          (event: Event) => {
+            this.event = event;
+          },
+          () => {
+            return alert('Erro de Conexão com o banco');
+          },
+          () => {
+            alert('Evento cadastrado!');
+            this.router.navigate(['/event/' + this.event.id]);
+          }
+        );
       return this.error404();
     } else {
       this.eventService
         .updateEvent((this.event = this.newEventForm.value))
-        .subscribe((event: Event) => {
-          this.event = event;
-        });
-      return this.error404();
+        .subscribe(
+          (event: Event) => {
+            this.event = event;
+          },
+          () => {
+            return alert('Erro de Conexão com o banco');
+          },
+          () => {
+            alert('Evento alterado!');
+            this.router.navigate(['/event/' + this.eventId]);
+          }
+        );
     }
   }
 
@@ -77,7 +94,8 @@ export class AddEventComponent implements OnInit {
           resolve(this.event);
         },
         () => {
-          this.error404();
+          alert('Erro de Conexão com o banco');
+          this.showSpinner = false;
         },
         () => {
           this.showSpinner = false;

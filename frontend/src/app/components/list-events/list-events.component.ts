@@ -25,7 +25,10 @@ export class ListEventsComponent implements OnInit {
       (events: Event[]) => {
         this.events = events;
       },
-      () => {}, // errors
+      () => {
+        alert('Erro de conexão com o banco');
+        this.showSpinner = false;
+      },
       () => {
         this.showSpinner = false;
       }
@@ -39,7 +42,9 @@ export class ListEventsComponent implements OnInit {
           this.event = event;
           resolve(this.event);
         },
-        () => {}, // errors
+        () => {
+          alert('Erro de conexão com o banco');
+        },
         () => {
           window.location.reload();
         }

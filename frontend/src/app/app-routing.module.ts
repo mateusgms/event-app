@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { BlogComponent } from './components/blog/blog.component';
+import { PostComponent } from './components/post/post.component';
 import { EventComponent } from './components/event/event.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
-import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
+import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { SupportComponent } from './components/support/support.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { VoucherComponent } from './components/voucher/voucher.component';
-import { ListBlogsComponent } from './components/list-blogs/list-blogs.component';
+import { ListPostsComponent } from './components/list-posts/list-posts.component';
 import { ListEventsComponent } from './components/list-events/list-events.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AddBlogComponent } from './components/add-blog/add-blog.component';
+import { AddPostComponent } from './components/add-post/add-post.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
@@ -25,11 +25,11 @@ const routes: Routes = [
   },
   {
     path: 'post',
-    component: BlogComponent,
+    component: PostComponent,
   },
   {
     path: 'post/:postId',
-    component: BlogDetailsComponent,
+    component: PostDetailsComponent,
   },
   {
     path: 'event',
@@ -57,7 +57,7 @@ const routes: Routes = [
   },
   {
     path: 'listposts',
-    component: ListBlogsComponent,
+    component: ListPostsComponent,
   },
   {
     path: 'listevents',
@@ -69,11 +69,11 @@ const routes: Routes = [
   },
   {
     path: 'addpost',
-    component: AddBlogComponent,
+    component: AddPostComponent,
   },
   {
     path: 'addpost/:postId',
-    component: AddBlogComponent,
+    component: AddPostComponent,
   },
   {
     path: 'addevent',

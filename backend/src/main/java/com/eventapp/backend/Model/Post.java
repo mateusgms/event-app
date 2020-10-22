@@ -12,30 +12,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "BLOG_TBL")
-public class Blog {
+@Table(name = "POST_TBL")
+public class Post {
 	@Id
 	@GeneratedValue
 	private int id;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-    private User author;
-    private String title;
-    private String summary;
-    private String text;
-    private String category;
-    private String imageURL;
-    private Date date;
+	private User author;
+	private String title;
+	private String summary;
+	private String text;
+	private String category;
+	private String imageURL;
+	private Date date;
 
-    public int getId() {
+	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}

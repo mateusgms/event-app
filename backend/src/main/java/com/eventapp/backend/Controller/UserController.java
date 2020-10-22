@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.eventapp.backend.Model.User;
 import com.eventapp.backend.Services.UserService;
-import com.eventapp.backend.exception.BlogNotFoundException;
+import com.eventapp.backend.exception.PostNotFoundException;
 import com.eventapp.backend.exception.UserNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +57,7 @@ public class UserController {
 
     // DELETE
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable int id) throws BlogNotFoundException {
+    public ResponseEntity<String> deleteUser(@PathVariable int id) throws PostNotFoundException {
         return new ResponseEntity<>(service.deleteUser(id), HttpStatus.OK);
     }
 }

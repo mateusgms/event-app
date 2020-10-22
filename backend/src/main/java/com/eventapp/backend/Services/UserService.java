@@ -2,11 +2,11 @@ package com.eventapp.backend.Services;
 
 import java.util.List;
 
-import com.eventapp.backend.Model.Blog;
+import com.eventapp.backend.Model.Post;
 import com.eventapp.backend.Model.User;
-import com.eventapp.backend.Repository.BlogRepository;
+import com.eventapp.backend.Repository.PostRepository;
 import com.eventapp.backend.Repository.UserRepository;
-import com.eventapp.backend.exception.BlogNotFoundException;
+import com.eventapp.backend.exception.PostNotFoundException;
 import com.eventapp.backend.exception.UserNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,10 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private BlogRepository blogRepository;
+    private PostRepository postRepository;
 
     @Autowired
-    private BlogService blogService;
+    private PostService postService;
 
     @Autowired
     private TokenService tokenService;
@@ -46,31 +46,31 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public String deleteUser(Integer id) throws BlogNotFoundException {
+    public String deleteUser(Integer id) throws PostNotFoundException {
 
         User user = userRepository.findById(id).get();
 
-        if (blogService.getBlogsByAuthor(user).isEmpty()) {
+        if (postService.getPostsByAuthor(user).isEmpty()) {
             System.out.println("Vim aqui");
             userRepository.deleteById(id);
             return "User removed!! " + id;
         } else {
-            List<Blog> blogs = blogRepository.findBlogsByAuthor(user);
-            System.out.println("Blogs:" + blogs.size());
+            List<Post> posts = postRepository.findPostsByAuthor(user);
+            System.out.println("Posts:" + posts.size());
 
-            for (Blog blog : blogs) {
+            for (Post post : posts) {
 
-                System.out.println("blog author:" + blog.getAuthor() + "Blog id:" + blog.getId());
+                System.out.println("post author:" + post.getAuthor() + "Post id:" + post.getId());
 
                 User userRoot = userRepository.findById(53).get();
 
-                System.out.println("blog author:" + blog.getAuthor() + "UserRoot id:" + userRoot.getId());
+                System.out.println("post author:" + post.getAuthor() + "UserRoot id:" + userRoot.getId());
 
-                blog.setAuthor(userRoot);
+                post.setAuthor(userRoot);
 
-                blogService.updateBlog(blog);
+                postService.updatePost(post);
 
-                System.out.println("blog author:" + blog.getAuthor());
+                System.out.println("post author:" + post.getAuthor());
 
             }
             userRepository.deleteById(id);

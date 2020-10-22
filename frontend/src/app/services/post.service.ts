@@ -6,47 +6,50 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Blog } from '../models/blog';
+import { Post } from '../models/post';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BlogService {
-  url = 'https://event-app3.herokuapp.com/blogs';
+export class PostService {
+  url = 'https://event-app3.herokuapp.com/posts';
 
   constructor(private httpClient: HttpClient) {}
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: '',
+    }),
   };
 
-  getBlogs(): Observable<Blog[]> {
+  getPosts(): Observable<Post[]> {
     return this.httpClient
-      .get<Blog[]>(this.url)
+      .get<Post[]>(this.url)
       .pipe(retry(2), catchError(this.handleError));
   }
-  getBlogById(id: number): Observable<Blog> {
+  getPostById(id: number): Observable<Post> {
     return this.httpClient
-      .get<Blog>(this.url + '/id/' + id)
+      .get<Post>(this.url + '/id/' + id)
       .pipe(retry(2), catchError(this.handleError));
   }
-  saveBlog(blog: Blog, userId: number): Observable<Blog> {
+  savePost(post: Post, userId: number): Observable<Post> {
     return this.httpClient
-      .post<Blog>(
+      .post<Post>(
         this.url + '?userId=' + userId,
-        JSON.stringify(blog),
+        JSON.stringify(post),
         this.httpOptions
       )
       .pipe(retry(2), catchError(this.handleError));
   }
-  updateBlog(blog: Blog): Observable<Blog> {
+  updatePost(post: Post): Observable<Post> {
     return this.httpClient
-      .put<Blog>(this.url, JSON.stringify(blog), this.httpOptions)
+      .put<Post>(this.url, JSON.stringify(post), this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  deleteBlog(blog: Blog) {
+  deletePost(post: Post) {
     return this.httpClient
-      .delete<Blog>(this.url + '/' + blog.id, this.httpOptions)
+      .delete<Post>(this.url + '/' + post.id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
 
