@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler({ UserNotFoundException.class, ContentNotAllowedException.class, EventNotFoundException.class,
-            VoucherNotFoundException.class, BlogNotFoundException.class, InvalidLoginException.class})
+            VoucherNotFoundException.class, PostNotFoundException.class, InvalidLoginException.class})
     @Nullable
     public final ResponseEntity<ApiError> handleException(Exception ex, WebRequest request) {
 
@@ -49,11 +49,11 @@ public class GlobalExceptionHandler {
             VoucherNotFoundException vnfe = (VoucherNotFoundException) ex;
 
             return handleVoucherNotFoundException(vnfe, headers, status, request);
-        }else if (ex instanceof BlogNotFoundException) {
+        }else if (ex instanceof PostNotFoundException) {
             HttpStatus status = HttpStatus.NOT_FOUND;
-            BlogNotFoundException vnfe = (BlogNotFoundException) ex;
+            PostNotFoundException vnfe = (PostNotFoundException) ex;
 
-            return handleBlogNotFoundException(vnfe, headers, status, request);
+            return handlePostNotFoundException(vnfe, headers, status, request);
         } else if (ex instanceof InvalidLoginException) {
             HttpStatus status = HttpStatus.UNAUTHORIZED;
             InvalidLoginException ile = (InvalidLoginException) ex;
@@ -80,7 +80,7 @@ public class GlobalExceptionHandler {
         return handleExceptionInternal(ex, new ApiError(errorMessages), headers, status, request);
     }
 
-    protected ResponseEntity<ApiError> handleBlogNotFoundException(BlogNotFoundException ex, HttpHeaders headers,
+    protected ResponseEntity<ApiError> handlePostNotFoundException(PostNotFoundException ex, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
         List<String> errorMessages = Collections.singletonList(ex.getMessage());
         return handleExceptionInternal(ex, new ApiError(errorMessages), headers, status, request);

@@ -24,7 +24,10 @@ export class EventComponent implements OnInit {
       (events: Event[]) => {
         this.events = events;
       },
-      () => {}, // errors
+      () => {
+        alert('erro de conexão com o banco');
+        this.showSpinner = false;
+      },
       () => {
         this.showSpinner = false;
       }

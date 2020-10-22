@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Blog } from './../../models/blog';
-import { BlogService } from './../../services/blog.service';
+import { Post } from './../../models/post';
+import { PostService } from './../../services/post.service';
 import { User } from './../../models/user';
 import { UserService } from './../../services/user.service';
 
 @Component({
-  selector: 'app-add-blog',
-  templateUrl: './add-blog.component.html',
-  styleUrls: ['./add-blog.component.css'],
+  selector: 'app-add-post',
+  templateUrl: './add-post.component.html',
+  styleUrls: ['./add-post.component.css'],
 })
-export class AddBlogComponent implements OnInit {
-  post = {} as Blog;
-  posts: Blog[];
+export class AddPostComponent implements OnInit {
+  post = {} as Post;
+  posts: Post[];
   newPostForm: FormGroup;
   submitted = false;
   user: User;
@@ -26,7 +26,7 @@ export class AddBlogComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private blogService: BlogService,
+    private postService: PostService,
     private userService: UserService
   ) {}
 
@@ -52,36 +52,56 @@ export class AddBlogComponent implements OnInit {
   }
 
   onSubmit(): any {
+    alert(JSON.stringify(this.newPostForm.value));
     this.submitted = true;
     if (this.newPostForm.invalid) {
       alert('Formulário inválido');
       return;
     } else if (this.postId == null) {
-      this.blogService
-        .saveBlog((this.post = this.newPostForm.value), this.userId)
-        .subscribe((post: Blog) => {
-          this.post = post;
-        });
-      return this.error404();
+      this.getAuthor();
+      this.postService
+        .savePost((this.post = this.newPostForm.value), this.userId)
+        .subscribe(
+          (post: Post) => {
+            this.post = post;
+          },
+          () => {
+            return alert('Erro de Conexão com o banco');
+          },
+          () => {
+            alert('Post cadastrado!');
+            alert(this.post.id);
+            this.router.navigate(['/post/' + this.post.id]);
+          }
+        );
     } else {
-      this.blogService
-        .updateBlog((this.post = this.newPostForm.value))
-        .subscribe((post: Blog) => {
-          this.post = post;
-        });
-      return this.error404();
+      this.postService
+        .updatePost((this.post = this.newPostForm.value))
+        .subscribe(
+          (post: Post) => {
+            this.post = post;
+          },
+          () => {
+            return alert('Erro de Conexão com o banco');
+          },
+          () => {
+            alert('Post alterado!');
+            this.router.navigate(['/post/' + this.postId]);
+          }
+        );
     }
   }
 
   getPostById(postId: number): any {
     return new Promise((resolve) => {
-      this.blogService.getBlogById(postId).subscribe(
-        (post: Blog) => {
+      this.postService.getPostById(postId).subscribe(
+        (post: Post) => {
           this.post = post;
           resolve(this.post);
         },
         () => {
-          this.error404();
+          alert('Erro de Conexão com o banco');
+          this.showSpinner = false;
         },
         () => {
           this.showSpinner = false;
@@ -90,7 +110,7 @@ export class AddBlogComponent implements OnInit {
     });
   }
 
-  createPostForm(post: Blog): any {
+  createPostForm(post: Post): any {
     this.newPostForm = this.formBuilder.group({
       id: [this.postId],
       author: [post.author], // Tirar o author depois de ter tirado no back
@@ -111,8 +131,8 @@ export class AddBlogComponent implements OnInit {
     });
   }
 
-  getAuthor() {
-    this.userId = 39; // TODO - pegar userId da seção
+  getAuthor(): void {
+    this.userId = 9; // TODO - pegar userId da seção
   }
 
   error404(): void {
