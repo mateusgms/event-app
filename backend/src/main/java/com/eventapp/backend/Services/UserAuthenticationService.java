@@ -26,7 +26,6 @@ public class UserAuthenticationService {
 
     public boolean authenticate(DadosLogin dados, String token)
             throws InvalidLoginException, InvalidTokenException, ExpiredTokenException {
-
         User user = userRepository.findByEmail(dados.getEmail());
 
         if (!token.isEmpty())
@@ -49,14 +48,13 @@ public class UserAuthenticationService {
         // System.out.println("userId: " + claims.getSubject());
         // System.out.println("name: " + claims.get("name"));
         // System.out.println("isAdmin: " + claims.get("isAdmin"));
-        // System.out.println("Token Expirado: " + claims.getExpiration().before(new
-        // Date(System.currentTimeMillis())));
+        // System.out.println("Token Expirado: " + claims.getExpiration().before(new Date(System.currentTimeMillis())));
+      
         if (claims.getExpiration().before(new Date(System.currentTimeMillis())))
             // insert clear token cookie function here
             return false;
         // throw new ExpiredTokenException()
         return true;
-
     }
 
     private boolean validateEquals(String token, User user) throws InvalidTokenException {
