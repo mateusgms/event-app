@@ -33,52 +33,29 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    public LoginController(UserAuthenticationService userAuthenticationService) {
-        this.userAuthenticationService = userAuthenticationService;
-    }
-
-    public LoginController() {
-
-    }
-
     @PostMapping("/login")
     public ResponseEntity<UserAutheticatedDTO> authentication(@RequestBody DadosLogin dadosLogin,
             @RequestHeader String Authorization)
             throws InvalidLoginException, InvalidTokenException, ExpiredTokenException {
-                
-                if(userAuthenticationService.authenticate(dadosLogin, Authorization)){
-                    String email = dadosLogin.getEmail();
-                    User user = userService.getUserByEmail(email);
-                    System.out.println(user);
-                    return new ResponseEntity<UserAutheticatedDTO>(UserAutheticatedDTO.toDTO(user, "Bearer "), HttpStatus.ACCEPTED);
-                } else {
-                    String email = dadosLogin.getEmail();
-                    User user = userService.getUserByEmail(email);
-                    System.out.println(user);
-                    return new ResponseEntity<UserAutheticatedDTO>(UserAutheticatedDTO.toDTO(user, "Bearer "), HttpStatus.UNAUTHORIZED);
-                }
-        
-        
 
-        
-        /*
-         * if (user.getEmail().isEmpty()) { System.err.println("Credenciais inválidas");
-         * return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST); } else { if
-         * (user.getPassword().equals(loginUser.getPassword())) {
-         * System.out.println("Login bem sucedido com o usuário" + user.getName());
-         * return new ResponseEntity<>(user, HttpStatus.OK); } else {
-         * System.err.println("Senha incorreta"); return new ResponseEntity<>(user,
-         * HttpStatus.UNAUTHORIZED); }
-         * 
-         * }
-         */
+        if (userAuthenticationService.authenticate(dadosLogin, Authorization)) {
+            String email = dadosLogin.getEmail();
+            User user = userService.getUserByEmail(email);
+            System.out.println("Usuário " + user.getEmail() + " logado");
+            return new ResponseEntity<UserAutheticatedDTO>(UserAutheticatedDTO.toDTO(user, "Bearer "),
+                    HttpStatus.ACCEPTED);
+        } else {
+            String email = dadosLogin.getEmail();
+            User user = userService.getUserByEmail(email);
+            // System.out.println(user);
+            return new ResponseEntity<UserAutheticatedDTO>(UserAutheticatedDTO.toDTO(user, "Bearer "),
+                    HttpStatus.UNAUTHORIZED);
+        }
 
     }
 
     @PostMapping("/register")
     public ResponseEntity<UserAutheticatedDTO> registrate(@RequestBody UserRegistrationDTO userRegistrationDTO) {
-
         User user = userRegistrationService.registrate(userRegistrationDTO.toUser());
 
         return new ResponseEntity<UserAutheticatedDTO>(UserAutheticatedDTO.toDTO(user, "Bearer "), HttpStatus.CREATED);

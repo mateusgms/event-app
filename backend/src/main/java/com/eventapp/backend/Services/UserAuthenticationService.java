@@ -18,57 +18,52 @@ import io.jsonwebtoken.Claims;
 @Service
 public class UserAuthenticationService {
 
-    private final UserRepository userRepository;
-    private final TokenService tokenService;
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
-    public UserAuthenticationService(UserRepository userRepository, TokenService tokenService) {
-        this.userRepository = userRepository;
-        this.tokenService = tokenService;
-    }
+    private TokenService tokenService;
 
     public boolean authenticate(DadosLogin dados, String token)
             throws InvalidLoginException, InvalidTokenException, ExpiredTokenException {
-
         User user = userRepository.findByEmail(dados.getEmail());
 
-        System.out.println(user.getName());
-        // System.out.println("Senha igual: " +
-        // dados.getSenha().equals(user.getPassword()));
-        System.out.println("Token vazio: " + token.isEmpty());
-        // System.out.println("Validado: " + validate(token));
-        System.out.println("Senha Bcrypt igual: " + BCrypt.checkpw(dados.getSenha(), user.getPassword()));
+        if (!token.isEmpty())
+            return this.validateExpiration(token); // && this.validateEquals(token, user);
         if (BCrypt.checkpw(dados.getSenha(), user.getPassword())) {
-            // if (dados.getSenha().equals(user.getPassword())) {
-
-            if (!token.isEmpty()  && validate(token)) {
-                return true;
-            } else {
-                user.setToken(tokenService.generateToken(user));
-                System.out.println("NOVO TOKEN: " + user.getToken());
-                return true;
-            }
-
+            user.setToken(tokenService.generateToken(user));
+            System.out.println("NOVO TOKEN: " + user.getToken());
+            return true;
         } else {
             throw new InvalidLoginException(user.getId());
         }
     }
 
-    private boolean validate(String token) throws InvalidTokenException, ExpiredTokenException {
+    private boolean validateExpiration(String token) throws ExpiredTokenException {
 
         String tokenTratado = token.replace("Bearer ", "");
-
         Claims claims = tokenService.decodeToken(tokenTratado);
-        
-        System.out.println(claims.getIssuer());
-        System.out.println(claims.getIssuedAt());
 
-        
-        // Verifica se o token está expirado
+        // System.out.println(claims.getIssuedAt());
+        // System.out.println("userId: " + claims.getSubject());
+        // System.out.println("name: " + claims.get("name"));
+        // System.out.println("isAdmin: " + claims.get("isAdmin"));
+        // System.out.println("Token Expirado: " + claims.getExpiration().before(new Date(System.currentTimeMillis())));
+      
         if (claims.getExpiration().before(new Date(System.currentTimeMillis())))
-            System.out.println(claims.getExpiration());
+            // insert clear token cookie function here
             return false;
+        // throw new ExpiredTokenException()
+        return true;
+    }
 
+    private boolean validateEquals(String token, User user) throws InvalidTokenException {
+        String tokenTratado = token.replace("Bearer ", "");
+        if (tokenTratado.equals(user.getToken()))
+            // insert clear token cookie function here
+            return false;
+        // throw new InvalidTokenException()
+        return true;
     }
 
 }
